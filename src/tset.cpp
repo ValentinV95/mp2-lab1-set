@@ -26,7 +26,7 @@ TSet::TSet(const TBitField &bf) : BitField(bf)
 
 TSet::operator TBitField()
 {
-	TBitField a(MaxPower);
+	TBitField a(BitField);
 	return a;
 }
 

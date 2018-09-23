@@ -295,3 +295,16 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, can_add_more_two_sets)
+{
+	const int size = 4;
+	TSet set(size), set1(size), set2(size), set3(size), set4(size), expSet(size);
+	set1.InsElem(0);
+	set2.InsElem(1);
+	set3.InsElem(2);
+	set4.InsElem(3);
+	set = set1 + set2 + set3 + set4;
+
+	expSet = ~expSet;
+	EXPECT_EQ(expSet, set);
+}

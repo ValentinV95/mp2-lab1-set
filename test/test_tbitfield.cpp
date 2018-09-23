@@ -17,7 +17,6 @@ TEST(TBitField, can_get_length)
 TEST(TBitField, new_bitfield_is_set_to_zero)
 {
   TBitField bf(100);
-
   int sum = 0;
   for (int i = 0; i < bf.GetLength(); i++)
   {
@@ -30,7 +29,6 @@ TEST(TBitField, new_bitfield_is_set_to_zero)
 TEST(TBitField, can_set_bit)
 {
   TBitField bf(10);
-
   EXPECT_EQ(0, bf.GetBit(3));
 
   bf.SetBit(3);
@@ -247,7 +245,6 @@ TEST(TBitField, can_invert_large_bitfield)
   for(int i = 0; i < size; i++)
     expNegBf.SetBit(i);
   expNegBf.ClrBit(35);
-
   EXPECT_EQ(expNegBf, negBf);
 }
 
@@ -309,3 +306,4 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+

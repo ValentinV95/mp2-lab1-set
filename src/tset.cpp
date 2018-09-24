@@ -101,7 +101,7 @@ TSet TSet::operator*(const TSet &s) // пересечение
 	TSet s1(len);
 	s1.BitField = (BitField & s.BitField);
 	return s1;
-}
+}	
 
 TSet TSet::operator~(void) // дополнение
 {

@@ -251,6 +251,7 @@ TEST(TSet, can_intersect_two_sets_of_equal_size)
   set2.InsElem(1);
   set2.InsElem(2);
   set3 = set1 * set2;
+
   // expSet = {1, 2}
   expSet.InsElem(1);
   expSet.InsElem(2);

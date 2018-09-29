@@ -295,3 +295,17 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, check_ins_and_invert)
+{
+	const int size = 3;
+	TSet a(size), b(size), c(size);
+	// a = {0, 2}
+	a.InsElem(0);
+	a.InsElem(2);
+	// a = {0, 1, 2}
+	a = a + 1;
+	// c = {0, 1, 2}
+	c = ~b;
+	EXPECT_EQ(a, c);
+}

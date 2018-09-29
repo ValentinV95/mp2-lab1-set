@@ -211,7 +211,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string x;
 	istr >> x;
-	for (int i = 0; i < bf.BitLen; i++)
+	for (int i = 0; (i < bf.BitLen) && (i < x.length()); i++)
 	{	
 		x[i] == '0' ? bf.ClrBit(i) : bf.SetBit(i);
 	}

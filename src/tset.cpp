@@ -120,12 +120,21 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
+	int x;
+	istr >> x;
+	s.BitField.SetBit(x);
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.BitField;
+	ostr << "Set contains the following elements:" << endl;
+	for (int i = 0; i < s.BitField.GetLength(); i++)
+	{	
+		if(s.BitField.GetBit(i))
+		{
+			ostr << i << " ";
+		}
+	}
 	return ostr;
 }

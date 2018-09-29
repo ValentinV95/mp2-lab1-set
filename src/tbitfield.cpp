@@ -8,7 +8,6 @@
 #include "tbitfield.h"
 #include <string>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 TBitField::TBitField(int len)
@@ -47,7 +46,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 {
 	if (n < 0 || n >= BitLen)
 	{
-		throw "Incorrect length";
+		throw "Incorrect bit";
 	}
 	return n / (8 * sizeof(TELEM));
 }
@@ -56,7 +55,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
 	if (n < 0 || n >= BitLen)
 	{
-		throw "Incorrect length";
+		throw "Incorrect bit";
 	}
 	return 1 << ((n - 1) % (8 * sizeof(TELEM)));
 }
@@ -72,7 +71,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
 	if (n < 0 || n >= BitLen)
 	{
-		throw "Incorrect length";
+		throw "Incorrect bit";
 	}
 	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
@@ -81,7 +80,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 {
 	if (n < 0 || n >= BitLen)
 	{
-		throw "Incorrect length";
+		throw "Incorrect bit";
 	}
 	pMem[GetMemIndex(n)] &= ~(GetMemMask(n));
 }
@@ -90,7 +89,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 {
 	if (n < 0 || n >= BitLen)
 	{
-		throw "Incorrect length";
+		throw "Incorrect bit";
 	}
 	if (pMem[GetMemIndex(n)] & GetMemMask(n))
 	{
@@ -208,7 +207,6 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	{
 		throw "Incorrect length";
 	}
-	reverse(temp.begin(), temp.end());
 	for (int i = 0; i < bf.BitLen; i++)
 	{
 		if (temp[i] == '0')

@@ -144,7 +144,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
 	int Elem;
 	istr >> Elem;
-	if (Elem >= s.BitField.GetLength())
+	if (Elem >= s.BitField.GetLength() || Elem < 0)
 	{
 		throw "Incorrect element";
 	}

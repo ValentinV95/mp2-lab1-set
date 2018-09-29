@@ -204,6 +204,10 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string temp;
 	istr >> temp;
+	if (temp.size() != bf.GetLength())
+	{
+		throw "Incorrect length";
+	}
 	reverse(temp.begin(), temp.end());
 	for (int i = 0; i < bf.BitLen; i++)
 	{
@@ -211,9 +215,13 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 		{
 			bf.ClrBit(i);
 		}
-		else
+		else if (temp[i] == '1')
 		{
 			bf.SetBit(i);
+		}
+		else
+		{
+			throw "Incorrect input";
 		}
 	}
 	return istr;

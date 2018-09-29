@@ -142,12 +142,25 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
+	int Elem;
+	istr >> Elem;
+	if (Elem >= s.BitField.GetLength())
+	{
+		throw "Incorrect element";
+	}
+	s.BitField.SetBit(Elem);
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.BitField;
+	ostr << "Elements of the set: ";
+	for (int i = 0; i < s.BitField.GetLength(); i++)
+	{
+		if (s.BitField.GetBit(i))
+		{
+			ostr << i << ((i == s.BitField.GetLength() - 1) ? "." : ", ");
+		}
+	}
 	return ostr;
 }

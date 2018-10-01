@@ -295,3 +295,54 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, My_test_4)
+{
+  const int size = 6;
+  TSet set1(size), set2(size), set3(size), set4(size);
+
+  set1.InsElem(0);
+  set1.InsElem(2);
+
+  set2.InsElem(1);
+  set2.InsElem(3);
+ 
+  set3.InsElem(1);
+  set3.InsElem(2);
+ 
+
+  set4.InsElem(1);
+  set4.InsElem(2);
+  
+
+  EXPECT_EQ(set4, (set1+set2)*set3);
+}
+
+TEST(TSet, My_test_5)
+{
+  const int size = 4;
+  TSet set1(size), set2(size), set3(size);
+
+  set1.InsElem(0);
+  set1.InsElem(2);
+
+  EXPECT_EQ(set3, ~set1*set2);
+}
+
+TEST(TSet, My_test_6)
+{
+  const int size = 6;
+  TSet set1(size), set2(size), set3(size), set4(size);
+
+  set1.InsElem(0);
+  set1.InsElem(2);
+
+  set2.InsElem(1);
+  set2.InsElem(3);
+ 
+  set3.InsElem(1);
+  set3.InsElem(2);
+ 
+
+  EXPECT_EQ(set1*set3+set2*set3, (set1+set2)*set3);
+}

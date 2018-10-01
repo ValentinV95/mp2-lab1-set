@@ -151,6 +151,7 @@ TEST(TBitField, compare_equal_bitfields_of_equal_size)
   EXPECT_EQ(bf1, bf2);
 }
 
+
 TEST(TBitField, or_operator_applied_to_bitfields_of_equal_size)
 {
   const int size = 4;
@@ -308,4 +309,50 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, My_test_1)
+{
+	const int size = 4;
+	TBitField bf1(size), bf2(size);
+	bf1.SetBit(1);
+	bf1.SetBit(1);
+
+	bf2.SetBit(1);
+
+	EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, My_test_2)
+{
+	const int size = 4;
+	TBitField bf1(size), bf2(size);
+	bf1.SetBit(1);
+	bf2.SetBit(1);
+
+	bf1.ClrBit(1);
+	bf1.ClrBit(1);
+
+	bf2.ClrBit(1);
+
+	EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, My_test_3)
+{
+	const int size = 4;
+	TBitField bf1(size), bf2(size), bf3(size), bf4(size);
+	bf1.SetBit(1);
+	bf1.SetBit(2);
+
+	bf2.SetBit(1);
+	bf2.SetBit(3);
+
+	bf3.SetBit(1);
+	bf3.SetBit(2);
+	bf3.SetBit(3);
+
+	bf4.SetBit(1);
+
+	EXPECT_EQ(bf4, bf1 & bf2 & bf3);
 }

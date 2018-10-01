@@ -131,7 +131,7 @@ TEST(TSet, can_insert_non_existing_element_using_plus_operator)
   set.InsElem(0);
   set.InsElem(2);
   updatedSet = set + k;
-
+  cout << updatedSet << endl;
   EXPECT_NE(0, updatedSet.IsMember(k));
 }
 
@@ -294,4 +294,23 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, and_many_set)
+{
+  const int size = 6;
+  TSet set(size), set1(size), set2(size) , res(size);
+  // set = {1, 3}
+  set.InsElem(1);
+  set.InsElem(3);
+  // set 1 ={0, 4}
+   set1.InsElem(0);
+  set1.InsElem(4);
+  // set2 = {2, 5}
+   set2.InsElem(2);
+  set2.InsElem(5);
+
+  for (int i = 0; i < size; i++)
+	  res.InsElem (i);
+  EXPECT_EQ( res , (set+set1+set2) );
 }

@@ -2,6 +2,9 @@
 
 #include <gtest.h>
 
+#include <fstream>
+using namespace std;
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
@@ -309,3 +312,52 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, input_not_exsist_elem)
+{
+  const int size = 4;
+  TBitField bf1(size);
+
+  ifstream fin;
+  fin.open("Test1.txt");
+
+ /* for (int i = 0; i < bf1.GetLength(); i++)
+  {*/
+	/*  fin >> bf1;*/
+
+	  //if (k==0)
+		 // bf1.ClrBit(i);
+	  //else
+		 // bf1.SetBit(i);
+  /*}*/
+
+ 
+  
+  ASSERT_ANY_THROW(fin >> bf1;);
+   fin.close();
+}
+//
+TEST(TBitField, input_invert_and)
+{
+	int k;
+  const int size = 4;
+  TBitField bf1(size), bf2(size), res(size), testbf(size);
+
+  ifstream fin;
+  fin.open("Test2.txt");
+
+ 
+	  fin >> bf1;
+	
+	  bf2 = bf1;
+ 
+	  /*for (int i = 0; i < size; i++)
+		  testbf.ClrBit(i);*/
+
+  res = ~bf1 & bf2;
+   cout << ~bf1;
+   cout << res;
+ /* testbf = negbf1 & bf2;*/
+  EXPECT_EQ( testbf , res );
+}
+

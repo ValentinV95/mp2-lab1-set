@@ -292,6 +292,5 @@ TEST(TSet, check_negation_operator)
   // expSet = {0, 2}
   expSet.InsElem(0);
   expSet.InsElem(2);
-
   EXPECT_EQ(expSet, set1);
 }

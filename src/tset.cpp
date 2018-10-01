@@ -89,14 +89,14 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	TSet set(*this);
-	set.BitField.SetBit(Elem);
+	set.InsElem(Elem);
 	return set;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
 	TSet set(*this);
-	set.BitField.ClrBit(Elem);
+	set.DelElem(Elem);
 	return set;
 }
 
@@ -122,7 +122,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
 	int x;
 	istr >> x;
-	s.BitField.SetBit(x);
+	s.InsElem(x);
 	return istr;
 }
 

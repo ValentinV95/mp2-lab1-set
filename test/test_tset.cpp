@@ -294,3 +294,40 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, my_test_4_check_equality_operator)
+{
+	const int size = 4;
+	TSet set(size), set1(size);
+	// set = {1, 3}
+	set.InsElem(1);
+	set.InsElem(3);
+	// set1 = {1, 3}
+	set1 = set;
+	EXPECT_EQ(set, set1);
+}
+
+TEST(TSet, my_test_5_can_combine_set_and_elem)
+{
+	const int size = 4;
+	TSet set(size), set1(size);
+	// set = {1,2,3}
+	set.InsElem(1);
+	set.InsElem(3);
+	set = set + 2;
+	// set1 = {1,2,3}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(3);
+	EXPECT_EQ(set, set1);
+}
+
+TEST(TSet, my_test_6_throw_when_insert_negative_elem)
+{
+	const int size = 4;
+	TSet set(size);
+	// set = {1, 3}
+	set.InsElem(1);
+	set.InsElem(3);
+	ASSERT_ANY_THROW(set.InsElem(-1));
+}

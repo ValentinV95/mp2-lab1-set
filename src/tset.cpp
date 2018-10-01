@@ -148,9 +148,10 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 	char buff[100];
 	int number_temp,current_pos = 0;
 	int count = 0;
-	istr >> a;
+	getline(istr, a);
 	for (int i = 0;i < a.size();i++)
 	{
+		current_pos = i;
 		count = 0;
 		while (a[current_pos] != ' ' && current_pos < a.size())
 		{
@@ -171,6 +172,10 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 			s.BitField.SetBit(number_temp);
 		}
 		i = current_pos;
+		for (int j = 0;j < 100;j++)
+		{
+			buff[j] = 0;
+		}
 	}
 	s.MaxPower = s.BitField.GetLength();
 	return istr;

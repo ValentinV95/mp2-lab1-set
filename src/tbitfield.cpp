@@ -211,9 +211,24 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string x;
 	istr >> x;
+	if(x.size() > bf.BitLen)
+	{
+		throw("Too_large_string_length");
+	}
+	for (int i = 0; i < x.length(); i++)
+	{
+		if ((x[i] != '0') && (x[i] != '1'))
+		{
+			throw("Unacceptable_input");
+		}
+	}
 	for (int i = 0; (i < bf.BitLen) && (i < x.length()); i++)
 	{	
 		x[i] == '0' ? bf.ClrBit(i) : bf.SetBit(i);
+	}
+	for (int i = x.length(); i < bf.BitLen; i++)
+	{	
+		bf.ClrBit(i);
 	}
 	return istr;
 }

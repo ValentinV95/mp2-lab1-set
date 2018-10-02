@@ -51,7 +51,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 	}
 	else 
 	{
-			throw("");
+			throw("Non-existent element");
 	}
 }
 
@@ -63,7 +63,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 	}
 	else 
 	{
-			throw("");
+			throw("Element doesn't belong to the set");
 	}
 }
 

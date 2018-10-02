@@ -182,18 +182,18 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	int lenght = bf.GetLength();
-
 	string in; 
 	istr >> in;
+	int len_in = in.length();
+	int len_bf = bf.GetLength();
 
-	if (bf.GetLength() != in.length())  throw(incorrect_evalue());
+	for (int i = 0; i < len_in; i++) {
 
-	for (int i = 0; i < in.length(); i++) {
+		if (in[i] == '1') bf.SetBit(i); 
 		
-		if (in[i] == '0') bf.ClrBit(i);
+		else if (in[i] == '0') bf.ClrBit(i);
 
-		else if (in[i] == '1') bf.SetBit(i);
+		else break;
 
 	}
 

@@ -186,7 +186,7 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	for (int i = 0; i < bf.MemLen; i++)
 		Tmp.pMem[i] &= bf.pMem[i];
 
-	if ( len = bf.BitLen)
+	if ( len == bf.BitLen)
 	{
 		for (int i = BitLen; i < len; i++ )
 			Tmp.ClrBit(i);

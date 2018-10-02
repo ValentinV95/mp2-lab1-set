@@ -46,7 +46,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 		return i; 
 	} 
 	else 
-		throw"";
+		throw"Incorrect length in the IsMember function";
 } 
 
 void TSet::InsElem(const int Elem) // включение элемента множества (проверка на область множства, выдать ошибку) 
@@ -54,7 +54,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 	if ((Elem >= 0) && (Elem < MaxPower)) 
 		BitField.SetBit(Elem); 
 	else 
-		throw""; 
+		throw"Incorrect length in the InsElem function"; 
 } 
 
 void TSet::DelElem(const int Elem) // исключение элемента множества 
@@ -62,7 +62,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 	if ((Elem >= 0) && (Elem < MaxPower)) 
 		BitField.ClrBit(Elem); 
 	else 
-		throw""; 
+		throw"Incorrect length in the DelElem function"; 
 } 
 
 // теоретико-множественные операции 

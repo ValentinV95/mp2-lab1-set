@@ -10,7 +10,7 @@
 TBitField::TBitField(int len)
 {
 	if (len<1)
-		throw"";
+		throw"Incorrect length in the constructor with parameter";
 	else
 	{
 		BitLen = len;
@@ -58,7 +58,7 @@ void TBitField::SetBit(const int n) // установить бит
 	if ((n>=0)&&(n<BitLen))
 		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | GetMemMask(n);
 	else
-		throw"";
+		throw"Incorrect length in the SetBit function";
 		
 }
 
@@ -67,7 +67,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 	if ((n>=0)&&(n<BitLen))
 	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & (~GetMemMask(n));
 	else
-		throw"";
+		throw"Incorrect length in the ClrBit function";
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
@@ -78,7 +78,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 		else
 			return 0;
 	else
-		throw"";
+		throw"Incorrect length in the GetBit function";
 }
 
 // битовые операции
@@ -172,7 +172,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	int n;
 	for (int i = 0; i < bf.BitLen; i++)
 	{
-		cin >> n;
+		istr >> n;
 		if (n)
 			bf.SetBit(n);
 		else
@@ -184,6 +184,6 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (int i = 0; i < bf.BitLen; i++)
-		cout << bf.GetBit(i);
+		ostr << bf.GetBit(i);
 	return ostr;
 }

@@ -356,3 +356,35 @@ TEST(TBitField, My_test_3)
 
 	EXPECT_EQ(bf4, bf1 & bf2 & bf3);
 }
+
+TEST(TBitField, My_and_operator_applied_to_bitfields_of_non_equal_size)
+{
+ 	const int size1 = 8, size2 = 7;
+	TBitField bf1(size1), bf2(size2), expBf(size1), res(size2);
+
+
+
+	bf1.SetBit(1);
+	bf1.SetBit(3);
+	bf1.SetBit(5);
+	bf1.SetBit(7);
+
+	bf2.SetBit(1);
+	bf2.SetBit(3);
+	bf2.SetBit(5);
+
+	expBf.SetBit(1);
+	expBf.SetBit(3);
+	expBf.SetBit(5);
+
+	cout<<"bf1: "<<bf1<<endl;
+	cout<<"bf2: "<<bf2<<endl;
+
+	res = bf1 & bf2;
+
+	cout<<"bf1 & bf2: "<<res<<endl;
+
+	cout<<"expBf (right answer): "<<expBf<<endl;
+	
+	EXPECT_EQ(expBf, bf1 & bf2);
+}

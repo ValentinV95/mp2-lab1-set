@@ -122,13 +122,9 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 	for (int i = 0; i < len; i++)
 
 	{
+		cin >> a;
+		s.InsElem(a);
 
-		istr >> a;
-		if (a == 1)
-			s.InsElem(i);
-		if (a == 0)
-			s.DelElem(i);
-		else throw ("Check set member");
 	}
 	return istr;
 }
@@ -137,6 +133,7 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
 	int len = s.MaxPower;
 	for (int i = 0; i< len; i++)
-		ostr << s.IsMember(i);
+		if (s.IsMember(i))
+			ostr << i;
 	return ostr;
 }

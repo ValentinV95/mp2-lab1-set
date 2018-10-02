@@ -145,36 +145,22 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	int wut;
-	TBitField C(1);
-	if (BitLen>bf.BitLen)
-	{
-		C = (*this);
-		wut = bf.MemLen;
-	}
-	else { 
-		C = bf;
-		wut = MemLen;
-	}
-	for (int i = 0; i < wut; i++)
+	int Newbl, Newml;
+	Newml = (bf.MemLen >= MemLen) ? bf.MemLen : MemLen;
+	Newbl = (bf.BitLen >= BitLen) ? bf.BitLen : BitLen;
+	TBitField C(Newbl);
+	for (int i = 0; i < Newml; i++)
 		C.pMem[i] = pMem[i]|bf.pMem[i];
 	return C;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	int wut;
-	TBitField C(1);
-	if (BitLen > bf.BitLen)
-	{
-		C = (*this);
-		wut = bf.MemLen;
-	}
-	else {
-		C = bf;
-		wut = MemLen;
-	}
-	for (int i = 0; i < wut; i++)
+	int Newbl,Newml;
+	Newml = (bf.MemLen >= MemLen) ? bf.MemLen : MemLen;
+	Newbl = (bf.BitLen >= BitLen) ? bf.BitLen : BitLen;
+	TBitField C(Newbl);
+	for (int i = 0; i < Newml; i++)
 		C.pMem[i] = pMem[i] & bf.pMem[i];
 	return C;
 }
@@ -186,8 +172,6 @@ TBitField TBitField::operator~(void) // отрицание
 	for (int i = 0; i < BitLen; i++)
 	{
 		rez = GetBit(i);
-		if ((rez != 0) && (rez != 1))
-			throw ("Check rez from~");
 		if (rez == 0)
 			C.SetBit(i);
 	}
@@ -203,21 +187,30 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	for (int i = 0; i < len; i++)
 
 	{
+		cin >> a;
+		switch (a)
+		{
+		case 1: bf.SetBit(i);
+			break;
+		case 0: bf.ClrBit(i);
+			break;
+		default: throw ("Uncorrect i/o");
+			break;
+		}
 		
-		istr >> a;
-		if (a == 1)
-			bf.SetBit(i);
-		if (a == 0)
-			bf.ClrBit(i);
-		else throw ("i uncorr bit");
 	}
 	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+	int a;
 	int len = bf.BitLen;
-	for (int i = 0; i< len; i++)
-		ostr << bf.GetBit(i);
+	for (int i = 0; i < len; i++)
+	{
+		a = bf.GetBit(i);
+		cout << a;
+
+	}
 	return ostr;
 }

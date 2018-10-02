@@ -2,6 +2,8 @@
 
 #include <gtest.h>
 
+//#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
@@ -308,4 +310,26 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+
+TEST(TBitField, or_operator_applied_to_several_bitfields)
+{
+	const int size1 = 2, size2 =3, size3 =4;
+	TBitField bf1(size1), bf2(size2), bf3(size3),temp(size2),expBf(size3);
+	// bf1 = 11
+	//bf2 = 110
+	for (int i = 0; i < size1; i++) {
+		bf1.SetBit(i);
+		bf2.SetBit(i);
+	}
+	//bf3=0001
+	bf3.SetBit(3);
+	
+	// expBf = 1101
+	expBf.SetBit(0);
+	expBf.SetBit(1);
+	expBf.SetBit(3);
+
+	EXPECT_EQ(expBf, bf1 | bf2 | bf3);
 }

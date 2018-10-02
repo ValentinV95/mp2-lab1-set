@@ -2,6 +2,8 @@
 
 #include <gtest.h>
 
+//#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;
@@ -294,4 +296,28 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+
+TEST(TSet, add_operator_applied_to_several_sets)
+{
+	const int size1 = 2, size2 = 3, size3 =5;
+	TSet set1(size1), set2(size2), set3(size3), temp(size2), expSet(size3);
+	//bf1 = {0,1}
+	set1.InsElem(0);
+	set1.InsElem(1);
+	//bf2 = {2}
+	set2.InsElem(2);
+	//bf3={1,2,4}
+	set3.InsElem(1);
+	set3.InsElem(2);
+	set3.InsElem(4);
+
+	// expSet= {0,1,2,4}
+	expSet.InsElem(0);
+	expSet.InsElem(1);
+	expSet.InsElem(2);
+	expSet.InsElem(4);
+	
+	EXPECT_EQ(expSet, set1+set2+set3);
 }

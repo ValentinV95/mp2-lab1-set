@@ -231,12 +231,22 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string sbf;
 	istr >> sbf;
-	
-	if (sbf.length() != bf.BitLen)
-		throw "Error: incorrect_length";
+
+	int small_len, big_len;
+
+	if (sbf.length() > bf.BitLen)
+	{
+		small_len = bf.BitLen;
+		big_len = sbf.length();
+	}
+	else
+	{
+		small_len = sbf.length();
+		big_len = bf.BitLen;
+	}
 
 
-	for (int i = 0; i < sbf.length(); i++)
+	for (int i = 0; i < small_len; i++)
 	{
 		switch (sbf[i])
 		{
@@ -246,9 +256,12 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			break;
 		default: throw "Error: incorrect_input";
 			break;
-		}
-	}
+	    }
 
+		for (int i = small_len; i < big_len && bf.BitLen > i; i++)
+			bf.ClrBit(i);
+	}
+   
 	return(istr);
 }
 

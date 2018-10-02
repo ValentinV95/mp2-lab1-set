@@ -132,7 +132,7 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 	{
 		if (s.BitField.GetBit(i))
 		{
-			ostr << i;
+			ostr << i << " ";
 		}
 	}
 	return ostr;

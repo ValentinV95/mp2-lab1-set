@@ -2,6 +2,7 @@
 
 #include <gtest.h>
 
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;
@@ -295,3 +296,40 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+// MY TESTS //
+
+TEST(TSet, can_use_negation_operator_twice)
+{
+	const int size = 5;
+	TSet set(size);
+	
+	// set = {0, 1, 2, 3, 4}
+	set.InsElem(0);
+	set.InsElem(1);
+	set.InsElem(2);
+	set.InsElem(3);
+	set.InsElem(4);
+
+	EXPECT_EQ(set, ~(~set));
+}
+
+TEST(TSet, can_remove_existing_element_using_minus_operator)
+{
+	const int size1 = 3, k = 1;
+	TSet set(size1), expSet(size1);
+
+	// set = {1, 2}
+	set.InsElem(1);
+	set.InsElem(2);
+	set = set - k;
+
+	// expSet = {2}
+	expSet.InsElem(2);
+
+	EXPECT_EQ(expSet, set);
+
+}
+
+
+

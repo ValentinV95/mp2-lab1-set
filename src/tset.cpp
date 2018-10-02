@@ -160,7 +160,14 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 		}
 		for (int j = 0;j < count;j++)
 		{
-			buff[j] = a[i + j];
+			if (a[i+j]<48 || a[i+j]>57)
+			{
+				throw "Non-number element type in set";
+			}
+			else
+			{
+				buff[j] = a[i + j];
+			}
 		}
 		number_temp = atoi(buff);
 		if (number_temp < 0 && number_temp >= s.MaxPower)

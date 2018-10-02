@@ -107,7 +107,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	}
 	else
 	{
-		if ((1 << (8 * sizeof(TELEM) - n % (8 * sizeof(TELEM)))) == (pMem[GetMemIndex(n)] & GetMemMask(n)))
+		if (GetMemMask(n) == (pMem[GetMemIndex(n)] & GetMemMask(n)))
 		{
 			return 1;
 		}
@@ -221,11 +221,13 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField a(this->BitLen);
+	int k;
 	for (int i = 0;i < MemLen - 1;i++)
 	{
 		a.pMem[i] = ~(this->pMem[i]);
 	}
-	for (int i = 0;i < (this->BitLen % (8 * sizeof(TELEM)));i++)
+	k = this->BitLen % (8 * sizeof(TELEM));
+	for (int i = 0;i < k;i++)
 	{
 		if (GetBit(8 * sizeof(TELEM)*(MemLen - 1) + i) == 1)
 		{

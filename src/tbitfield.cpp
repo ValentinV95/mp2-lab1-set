@@ -99,7 +99,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	else {
 		int InMem = GetMemIndex(n);
 		int Sm = n % (sizeof(TELEM) * 8);
-		if ((pMem[InMem] & (1 << Sm)) == GetMemMask(Sm))
+		if ((pMem[InMem] & GetMemMask(n)) == GetMemMask(n))
 			return 1;
 		else return 0;
 	}

@@ -119,14 +119,15 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
 	int n = s.GetMaxPower();
 
-	for (int i = 0; i < n; i++) {
-
+	do {
 		TELEM tmp;
 		istr >> tmp;
 
-		s.InsElem(tmp);
+		if ((tmp > s.GetMaxPower()) && (tmp < 0)) throw ("incorrect value");
 
-	}
+		else s.InsElem(tmp);
+
+	} while (istr.get() != '\n');
 
 	return istr;
 }

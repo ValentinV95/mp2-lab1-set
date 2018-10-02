@@ -187,7 +187,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	int len_in = in.length();
 	int len_bf = bf.GetLength();
 
-	for (int i = 0; i < len_in; i++) {
+	for (int i = 0;(i < len_in && i < len_bf); i++) {
 
 		if (in[i] == '1') bf.SetBit(i); 
 		

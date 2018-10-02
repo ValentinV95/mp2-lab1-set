@@ -211,11 +211,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string x;
 	istr >> x;
-	if(x.size() > bf.BitLen)
-	{
-		throw("Too_large_string_length");
-	}
-	for (int i = 0; i < x.length(); i++)
+	for (int i = 0; (i < bf.BitLen) && (i < x.length()); i++)
 	{
 		if ((x[i] != '0') && (x[i] != '1'))
 		{

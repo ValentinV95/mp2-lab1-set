@@ -2,6 +2,17 @@
 
 #include <gtest.h>
 
+TEST(TBitField, MY_TEST_can_do_a_double_negative)
+{
+	const int size = 2;
+	TBitField bf(size), negBf(size), expNegBf(size);
+	bf.SetBit(1);
+	negBf = ~bf;
+	expNegBf=~negBf;
+	EXPECT_NE(expNegBf, bf);
+}
+
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));

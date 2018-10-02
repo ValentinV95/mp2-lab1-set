@@ -251,6 +251,7 @@ TEST(TSet, can_intersect_two_sets_of_equal_size)
   set2.InsElem(1);
   set2.InsElem(2);
   set3 = set1 * set2;
+
   // expSet = {1, 2}
   expSet.InsElem(1);
   expSet.InsElem(2);
@@ -295,3 +296,40 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, test_invert)
+{
+	const int size = 4;
+	TSet set(size), set1(size), expSet(size);
+	// set1 = {1, 3}
+	set.InsElem(1);
+	set.InsElem(3);
+	set = set + 2;
+	set1 = ~set;
+	expSet.InsElem(0);
+
+	EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, test_insert_negative_elem)
+{
+	const int size = 4;
+	TSet set(size), set1(size), expSet(size);
+	// set1 = {1, 3}
+	set.InsElem(1);
+	set.InsElem(3);
+	
+	ASSERT_ANY_THROW(set + (-1));
+}
+
+TEST(TSet, test_insert_large_elem)
+{
+	const int size = 4;
+	TSet set(size), set1(size), expSet(size);
+	// set1 = {1, 3}
+	set.InsElem(1);
+	set.InsElem(3);
+
+	ASSERT_ANY_THROW(set + (5));
+}
+

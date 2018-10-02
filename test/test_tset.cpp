@@ -258,6 +258,30 @@ TEST(TSet, can_intersect_two_sets_of_equal_size)
   EXPECT_EQ(expSet, set3);
 }
 
+TEST(TSet, can_intersect_three_sets_of_non_equal_size)
+{
+	const int size1 = 5, size2 = 7;
+	TSet set1(size1), set2(size2), set3(size2), set4(size1), expSet(size2);
+	// set1 = {1, 2, 4}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(4);
+	// set2 = {0, 1, 2, 4, 6}
+	set2.InsElem(0);
+	set2.InsElem(1);
+	set2.InsElem(2);
+	set2.InsElem(4);
+	set2.InsElem(6);
+	// set3 = {4 , 5}
+	set3.InsElem(4);
+	set3.InsElem(5);
+	set4 = set1 * set2 * set3;
+	// expSet = {4}
+	expSet.InsElem(4);
+
+	EXPECT_EQ(expSet, set4);
+}
+
 TEST(TSet, can_intersect_two_sets_of_non_equal_size)
 {
   const int size1 = 5, size2 = 7;

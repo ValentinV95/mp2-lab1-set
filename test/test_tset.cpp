@@ -295,3 +295,26 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, can_do_minus_operator)
+{
+	const int size = 15;
+	const int k = 3;
+	TSet set(size), updatedSet(size);
+	set.InsElem(0);
+	set.InsElem(k);
+	updatedSet = set - k;
+
+	EXPECT_NE(0, set.IsMember(k));
+}
+
+TEST(TSet, do_plus_2_time)
+{
+	const int size = 3;
+	TSet set1(size), set2(size), set3(size), rez(size), rts(size);
+	set1.InsElem(0);
+	set2.InsElem(1);
+	set3.InsElem(2);
+	rts = set1 + set2 + set3;
+	rez.InsElem(0); rez.InsElem(1); rez.InsElem(2);
+	EXPECT_EQ(rez, rts);
+}

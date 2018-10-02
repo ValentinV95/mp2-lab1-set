@@ -63,9 +63,7 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-	if (BitField.GetLength() != s.BitField.GetLength()) return 0;
-
-	else if (BitField != s.BitField) return 0;
+	if (BitField != s.BitField) return 0;
 	
     return 1;
 }

@@ -12,7 +12,7 @@ TBitField::TBitField(int len)
 
 	if ( len > 0 )
 	{	
-	MemLen = (len + 31) >> 5;
+	MemLen = (len-1)/(sizeof(TELEM)*8)+1; 
 	pMem = new TELEM [MemLen];
 	BitLen = len;
 	for ( int i = 0; i < MemLen; i++)
@@ -63,7 +63,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
 	if ((n < 0) || (n >= BitLen))
 	{
-		throw("Negative len");
+		throw("You want to set wrong bit");
 	}
 	else
 	{
@@ -76,7 +76,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 {
 	if ((n < 0) || (n >= BitLen))
 	{
-		throw("Negative len");
+		throw("You want to clear wrong bit");
 	}
 	else
 	{
@@ -90,7 +90,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 {
 	if ((n < 0) || (n >= BitLen))
 	{
-		throw("Negative len");
+		throw("You want to get wrong bit");
 	}
 	else
 	{
@@ -186,6 +186,18 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	for (int i = 0; i < bf.MemLen; i++)
 		Tmp.pMem[i] &= bf.pMem[i];
 
+	if ( len = bf.BitLen)
+	{
+		for (int i = BitLen; i < len; i++ )
+			Tmp.ClrBit(i);
+	}
+	else 
+	{
+		for (int i = bf.BitLen; i < len; i++ )
+			Tmp.ClrBit(i);
+	}
+
+
 	return Tmp;	
 
 }
@@ -219,7 +231,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			bf.SetBit(i);
 		else 
 	{
-		throw("Negative len");
+		throw("Inalid element");
 	}
 	}
 	return istr;
@@ -231,8 +243,7 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 	for (int i = 0; i < bf.BitLen; i++)
 	{
 		Elem = bf.GetBit(i);
-		if (Elem == 1)
-			ostr << i << " ";
+		ostr << Elem << " ";
 	}
 	return ostr;
 }

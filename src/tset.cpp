@@ -75,7 +75,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 	}
 	else 
 	{
-			throw("");
+			throw("Invalid element!");
 	}
 }
 
@@ -85,7 +85,6 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 {
 	if ( this != &s)
 	{
-		~BitField;
 		MaxPower = s.MaxPower;
 		BitField = s.BitField;
 

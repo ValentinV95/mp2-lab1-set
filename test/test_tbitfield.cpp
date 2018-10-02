@@ -313,47 +313,34 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   EXPECT_NE(bf1, bf2);
 }
 
-TEST(TBitField, input_not_exsist_elem)
+TEST(TBitField, invert_invert)
 {
   const int size = 4;
-  TBitField bf1(size);
+  TBitField bf1(size), res (size);
+	bf1.SetBit(0);
+	bf1.ClrBit(1);
+	bf1.ClrBit(2);
+	bf1.SetBit(3);
 
-  ifstream fin;
-  fin.open("Test1.txt");
+	res = ~bf1;
+	res = ~res;
 
- /* for (int i = 0; i < bf1.GetLength(); i++)
-  {*/
-	/*  fin >> bf1;*/
-
-	  //if (k==0)
-		 // bf1.ClrBit(i);
-	  //else
-		 // bf1.SetBit(i);
-  /*}*/
-
- 
-  
-  ASSERT_ANY_THROW(fin >> bf1;);
-   fin.close();
+	EXPECT_EQ(bf1 , res);
 }
 //
-TEST(TBitField, input_invert_and)
+TEST(TBitField, invert_and)
 {
 	int k;
   const int size = 4;
   TBitField bf1(size), bf2(size), res(size), testbf(size);
-
-  ifstream fin;
-  fin.open("Test2.txt");
-
- 
-	  fin >> bf1;
-	
+   
+	bf1.SetBit(0);
+	bf1.ClrBit(1);
+	bf1.ClrBit(2);
+	bf1.SetBit(3);
+	 
 	  bf2 = bf1;
  
-	  /*for (int i = 0; i < size; i++)
-		  testbf.ClrBit(i);*/
-
   res = ~bf1 & bf2;
    cout << ~bf1;
    cout << res;

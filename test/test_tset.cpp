@@ -131,7 +131,6 @@ TEST(TSet, can_insert_non_existing_element_using_plus_operator)
   set.InsElem(0);
   set.InsElem(2);
   updatedSet = set + k;
-  cout << updatedSet << endl;
   EXPECT_NE(0, updatedSet.IsMember(k));
 }
 

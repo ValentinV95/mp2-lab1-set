@@ -6,6 +6,7 @@
 // Битовое поле
 
 #include "tbitfield.h"
+#include <string>
 
 struct incorrect_evalue {
 	string s;
@@ -183,16 +184,16 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	int lenght = bf.GetLength();
 
-	for (int i = 0; i < lenght; i++) {
+	string in; 
+	istr >> in;
+
+	if (bf.GetLength() != in.length())  throw(incorrect_evalue());
+
+	for (int i = 0; i < in.length(); i++) {
 		
-		int val;
-		istr >> val; 
+		if (in[i] == '0') bf.ClrBit(i);
 
-		if (val == 1) bf.SetBit(i);
-
-		else if (val == 0) bf.ClrBit(i);
-
-		else throw(incorrect_evalue());
+		else if (in[i] == '1') bf.SetBit(i);
 
 	}
 

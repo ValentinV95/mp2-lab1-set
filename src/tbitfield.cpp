@@ -12,10 +12,13 @@ TBitField::TBitField(int len)
 	BitLen = len;
 	if (BitLen <= 0)
 		throw("Negative len");
-		MemLen = ((BitLen - 1) /( 8 * sizeof(unsigned))) + 1;
+	else
+	{
+		MemLen = ((BitLen - 1) / (8 * sizeof(unsigned))) + 1;
 		pMem = new TELEM[MemLen];
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = 0;
+	}
 	
 }
 
@@ -40,19 +43,25 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 	
 	if ((n < 0) || (n>(BitLen-1)))
 		throw ("Uncorr num for get");
-	int Ind = n/(sizeof(TELEM) * 8);
+	else {
+		int Ind = n / (sizeof(TELEM) * 8);
 
-	return Ind;
+		return Ind;
+	}
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	if ((n < 0) || (n>(BitLen - 1)))
 		throw ("uncor num for mask");
-	int otst= n % (sizeof(TELEM) * 8);
-	TELEM Mask=0;
-	 Mask = 1 << otst;
-	return Mask;
+	
+	else 
+	{
+		int otst = n % (sizeof(TELEM) * 8);
+		TELEM Mask = 0;
+		Mask = 1 << otst;
+		return Mask;
+	}
 }
 
 // доступ к битам битового поля
@@ -66,29 +75,34 @@ void TBitField::SetBit(const int n) // установить бит
 {
 	if ((n < 0) || (n>(BitLen - 1)))
 		throw ("uncorr num for set");
-	
-	TELEM maskto = GetMemMask(n);
-	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | maskto;
-	
+	else
+	{
+		TELEM maskto = GetMemMask(n);
+		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | maskto;
+	}
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if ((n < 0) || (n>(BitLen - 1)))
 		throw ("uncorr num for clr");
-	TELEM Mask = ~GetMemMask(n);
-	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & Mask;
+	else {
+		TELEM Mask = ~GetMemMask(n);
+		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & Mask;
+	}
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if ((n < 0) || (n>(BitLen - 1)))
 		throw ("uncorr num for get");
-	int InMem = GetMemIndex(n);
-	int Sm = n % (sizeof(TELEM) * 8);
-	if ((pMem[InMem]&(1 << Sm))==GetMemMask(Sm))
-		return 1;
-	else return 0;
+	else {
+		int InMem = GetMemIndex(n);
+		int Sm = n % (sizeof(TELEM) * 8);
+		if ((pMem[InMem] & (1 << Sm)) == GetMemMask(Sm))
+			return 1;
+		else return 0;
+	}
 }
 
 // битовые операции

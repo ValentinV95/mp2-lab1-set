@@ -9,7 +9,7 @@ TEST(TBitField, MY_TEST_can_do_a_double_negative)
 	bf.SetBit(1);
 	negBf = ~bf;
 	expNegBf=~negBf;
-	EXPECT_NE(expNegBf, bf);
+	EXPECT_EQ(expNegBf, bf);
 }
 
 

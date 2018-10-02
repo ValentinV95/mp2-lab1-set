@@ -119,14 +119,21 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод 
 {
-	istr >> s.BitField;
-	s.MaxPower = s.BitField.GetLength();
+	int str;
+	istr >> str;
+	s.InsElem(str);
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод 
 {
-	ostr << s.BitField;
+	ostr << "Set contains elements:" << endl;
+	for (int i = 0; i < s.BitField.GetLength(); i++)
+	{
+		if (s.BitField.GetBit(i))
+		{
+			ostr << i << " ";
+		}
+	}
 	return ostr;
 }
-

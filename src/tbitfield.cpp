@@ -9,6 +9,7 @@
 #include "tbitfield.h"
 #include "iostream"
 #include "string"
+#include "math.h"
 
 TBitField::TBitField(int len)
 {
@@ -76,8 +77,8 @@ void TBitField::ClrBit(const int n) // очистить бит
 {
 	if (n >= 0 && n < BitLen)
 	{
-		int position = n % (sizeof(TELEM) * 8);
-		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & (~GetMemMask(position));
+		
+		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & (~GetMemMask(n));
 	}
 	else
 		throw "Invalid index";
@@ -140,16 +141,24 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	if (BitLen >= bf.BitLen)
 	{
 		TBitField tmp(BitLen);
+		TBitField bftmp(BitLen);
 		for (int i = 0; i < bf.MemLen; i++) {
-			tmp.pMem[i] = pMem[i] | bf.pMem[i];
+			bftmp.pMem[i] = bftmp.pMem[i] | bf.pMem[i];
+		}
+		for (int i = 0; i < bf.MemLen; i++) {
+			tmp.pMem[i] = pMem[i] | bftmp.pMem[i];
 		}
 		return tmp;
 	}
 	else
 	{
 		TBitField tmp(bf.BitLen);
+		TBitField thistmp(bf.BitLen);
 		for (int i = 0; i < MemLen; i++) {
-			tmp.pMem[i] = pMem[i] | bf.pMem[i];
+			thistmp.pMem[i] = thistmp.pMem[i] | pMem[i];
+		}
+		for (int i = 0; i < MemLen; i++) {
+			tmp.pMem[i] = thistmp.pMem[i] | bf.pMem[i];
 		}
 		return tmp;
 	}
@@ -199,24 +208,34 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	string str;
 	istr >> str;
-	int j = str.size() - 1;
-	for (int i = 0; i < str.size(); i++, j--)
+	for (int i = 0; (i < bf.BitLen) && (i < str.length()); i++)
+
 	{
-		if (str[i] == '1')
-			bf.SetBit(j);
+		if ((str[i] != '0') && (str[i] != '1'))
+		{
+			throw("Unacceptable_input");
+		}
+	}
+
+	for (int i = 0; (i < bf.BitLen) && (i < str.length()); i++)
+	{
+		str[i] == '0' ? bf.ClrBit(i) : bf.SetBit(i);
+	}
+	for (int i = str.length(); i < bf.BitLen; i++)
+
+	{
+		bf.ClrBit(i);
 	}
 	return istr;
 }
 
+
+
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод 
 {
-	int j = bf.BitLen - 1;
-	for (int i = 0; i < bf.BitLen; i++, j--)
+	for (int i = 0; i < bf.BitLen; i++)
 	{
-		if (bf.GetBit(j) == 0)
-			ostr << 0;
-		else
-			ostr << 1;
+		ostr << bf.GetBit(i);
 	}
 	return ostr;
 }

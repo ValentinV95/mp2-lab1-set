@@ -27,6 +27,7 @@ TEST(TBitField, new_bitfield_is_set_to_zero)
   EXPECT_EQ(0, sum);
 }
 
+
 TEST(TBitField, can_set_bit)
 {
   TBitField bf(10);
@@ -36,6 +37,7 @@ TEST(TBitField, can_set_bit)
   bf.SetBit(3);
   EXPECT_NE(0, bf.GetBit(3));
 }
+
 
 TEST(TBitField, can_clear_bit)
 {
@@ -150,6 +152,7 @@ TEST(TBitField, compare_equal_bitfields_of_equal_size)
 
   EXPECT_EQ(bf1, bf2);
 }
+
 
 TEST(TBitField, or_operator_applied_to_bitfields_of_equal_size)
 {
@@ -308,4 +311,33 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+// MY TEST //
+
+TEST(TBitField, invert_plus_and_operator_plus_or_operator_on_different_size_bitfield)
+{
+	const int size1 = 3, size2 = 5, size3 = 7;
+	TBitField bf1(size1), bf2(size2), bf3(size3), expbf(size3);
+	
+	// bf1 = 010
+	bf1.SetBit(1);
+
+	// bf2 = 100110
+	bf2.SetBit(0);
+	bf2.SetBit(3);
+	bf2.SetBit(4);
+
+	// bf3 = 0000100
+	bf3.SetBit(4);
+
+	// expbf = 0111011
+	expbf.SetBit(1);
+	expbf.SetBit(2);
+	expbf.SetBit(3);
+	expbf.SetBit(5);
+	expbf.SetBit(6);
+
+	EXPECT_EQ(expbf, ~( (~bf1 | bf3) & bf2) );
+	
 }

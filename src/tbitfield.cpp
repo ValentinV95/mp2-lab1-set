@@ -7,6 +7,7 @@
 
 #include "tbitfield.h"
 #include <math.h>
+#include <string>
 
 TBitField::TBitField(int len) 
 {
@@ -50,10 +51,7 @@ TBitField::~TBitField() //деструктор
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	int Index = (int)(n / (sizeof(TELEM) * 8));
-	if ((n % (sizeof(TELEM) * 8)) > 0)
-	{
-		Index++;
-	}
+	
 	return Index;
 }
 
@@ -95,7 +93,7 @@ void TBitField::ClrBit(const int n)
 	}
 	else
 	{
-		throw "Wrong data";
+		throw "Индекс бита отрицателен(или равен нулю) или превышает размер битового поля";
 	}
 }
 
@@ -115,7 +113,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	}
 	else
 	{
-		throw "Wrong data";
+		throw "Индекс бита отрицателен(или равен нулю) или превышает размер битового поля";
 	}
 }
 
@@ -184,9 +182,9 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	else
 		tmp = bf.BitLen;
 	TBitField result(tmp);
-	for (int i = 0; i <result.MemLen; i++)
+	for (int i = 0; i < MemLen; i++)
 		result.pMem[i] = pMem[i];
-	for (int i = 0; i < result.MemLen; i++)
+	for (int i = 0; i < bf.MemLen; i++)
 		result.pMem[i] &= bf.pMem[i];
 	return result;
 }
@@ -195,7 +193,6 @@ TBitField TBitField::operator~(void) // отрицание
 {
 	TBitField result(BitLen);
 	int n = BitLen - 1;
-	int m = GetMemIndex(n);
 	for (int i = 0; i < BitLen; i++)
 		if (GetBit(i) != 0)
 			result.ClrBit(i);
@@ -208,18 +205,18 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator >> (istream &istr, TBitField &bf) // ввод
 {
-	char m; int i;
-	do istr >> m;
-	while (m != ' ');
-	while (1) {
-		istr >> m;
-		if (m == '1')
-			bf.SetBit(i++);
-		else
-			if (m == '0')
-				bf.ClrBit(i++);
-			else break;
+	string strtmp;
+	cin >> strtmp;
+	const char* tmp = strtmp.c_str();
+	TBitField b(strlen(tmp));
+	for (int i = 0; i < strlen(tmp); i++)
+	{
+		if (tmp[i] == '1')
+		{
+			b.SetBit(i);
+		}
 	}
+	bf = b;
 	return istr;
 }
 
@@ -227,7 +224,7 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (int i = 0; i < bf.BitLen; i++)
 	{
-		if ((bf.pMem[(int)(i / (sizeof(TELEM) * 8))] & bf.GetMemMask(i)) == bf.GetMemMask(i))
+		if (bf.GetBit(i) == bf.GetMemMask(i))
 		{
 			ostr << "1";
 		}

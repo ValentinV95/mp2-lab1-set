@@ -111,7 +111,7 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 {	
 	if (Elem >= MaxPower)
 	{
-		throw 1;
+		throw "Elem > Maxpower";
 	}
 	else
 	{

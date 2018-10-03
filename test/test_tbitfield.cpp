@@ -309,3 +309,14 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, add_operator_tree)
+{
+	TBitField m(6), n(6), k(6), tmp(6), M(6);
+	m.SetBit(1);
+	n.SetBit(2);
+	k.SetBit(3);
+	M.SetBit(1);
+	M.SetBit(2);
+	M.SetBit(3);
+	EXPECT_EQ(M, m | n | k);
+}

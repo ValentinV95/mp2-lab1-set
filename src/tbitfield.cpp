@@ -190,12 +190,13 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	int i = 0;
 	for(i ; i<bf.BitLen; i++)
 		 istr >> m;
-	while ((m != 1) && (m != 0))
+	while ((m != '1') && (m != '0')) {
 		istr >> m;
-	if (m==0)
-		bf.ClrBit(i);
-	else
-		bf.SetBit(i);
+		if (m == '0')
+			bf.ClrBit(i);
+		else
+			bf.SetBit(i);
+	}
 	return istr;
 }
 

@@ -295,3 +295,15 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, ac2)
+{
+	int n = 100;
+	TSet s1(n), s2(n), s3(n), sum(n);
+	s1.InsElem(0);
+	s2.InsElem(1);
+	s3.InsElem(2);
+	sum.InsElem(0);
+	sum.InsElem(1);
+	sum.InsElem(2);
+	EXPECT_EQ(sum, s1 + s2 + s3);
+}

@@ -309,3 +309,18 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, ac)
+{
+	int n = 100;
+	TBitField s1(n), s2(n), s3(n), sum(n);
+	s1.SetBit(0);
+	s2.SetBit(1);
+	s3.SetBit(2);
+	sum.SetBit(0);
+	sum.SetBit(1);
+	sum.SetBit(2);
+
+
+
+	EXPECT_EQ(sum, s1 | s2 | s3);
+}

@@ -172,8 +172,9 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	TBitField a(max(BitLen, bf.BitLen));
-	if (BitLen > bf.BitLen)
+	TBitField a(max(BitLen, bf.BitLen)); // a = {0}
+	//максимум из полей по BitLen кладем в а
+	if (BitLen > bf.BitLen) 
 	{
 		for (int i = 0;i < MemLen;i++)
 		{
@@ -182,7 +183,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	}
 	else
 	{
-		for (int i = 0;i < MemLen;i++)
+		for (int i = 0;i < bf.MemLen;i++)
 		{
 			a.pMem[i] = bf.pMem[i];
 		}
@@ -196,19 +197,20 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	TBitField a(max(BitLen, bf.BitLen));
+	TBitField a(max(BitLen, bf.BitLen));  // a = {0}
+	//минимум из полей по BitLen кладем в а
 	if (BitLen > bf.BitLen)
 	{
-		for (int i = 0;i < MemLen;i++)
+		for (int i = 0;i < bf.MemLen;i++)
 		{
-			a.pMem[i] = pMem[i];
+			a.pMem[i] = bf.pMem[i];
 		}
 	}
 	else
 	{
 		for (int i = 0;i < MemLen;i++)
 		{
-			a.pMem[i] = bf.pMem[i];
+			a.pMem[i] = pMem[i];
 		}
 	}
 	for (int i = 0;i < min(MemLen, bf.MemLen);i++)
@@ -258,10 +260,10 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 			if (a[i] == '0')
 			{
 				bf.ClrBit(i);
-			}
+			} 
 			else
 			{
-				bf.ClrBit(i); // a[i]!=0 && a[i]!=1
+				throw "Non '0' or '1' type of element in bitfield";
 			}
 		}
 	}

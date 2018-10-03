@@ -137,6 +137,6 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 	for(int i = 1; i <= s.GetMaxPower() ; i++)
 		if(s.IsMember(i))
 
-			ostr << i ;
+			ostr << i<<' ';
     return ostr; 
 }

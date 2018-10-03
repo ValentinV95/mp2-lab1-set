@@ -65,7 +65,7 @@ void TBitField::SetBit(const int n) // установить бит
 		
 	}
 	else {
-		throw ("Значение отрицательно или ьольше допустимого");
+		throw ("Значение отрицательно или больше допустимого");
 	}
 	
 }
@@ -77,7 +77,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 	pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] & ~(GetMemMask(n)) ;
 	}
 	else {
-	throw ("Значение отрицательно или ьольше допустимого");
+	throw ("Значение отрицательно или больше допустимого");
 	}
 }
 
@@ -95,7 +95,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	 return tmp;
 	}
 	else {
-	throw ("Значение отрицательно или ьольше допустимого");
+	throw ("Значение отрицательно или больше допустимого");
 	}
  
 }
@@ -136,22 +136,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-	int i = 0, tmp = 1, n = bf.GetLength();
-	if(BitLen == n){
-		tmp = 0;
-		while (i < n){
-
-			if (bf.GetBit(i) != GetBit(i)) {
-				tmp = 1;
-				
-				break;
-
-			}
-			i++;
-		}
-	}
-  return tmp;
- 
+	return (!((*this) == bf)); 
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
@@ -241,10 +226,10 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-	unsigned int temp;
-	for(int i =0; i< bf.BitLen; i++) {
-	istr >> temp  ;
-	while (temp != 1 && temp!=0) {
+	unsigned int  temp;
+	
+	for(int i =0 ; i < bf.BitLen; i++) {
+		istr >> temp ;
 		if(temp) {
 			bf.SetBit(i);
 		}else {
@@ -252,15 +237,15 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 		}
 	}
 	
-	}
+	
    return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for(int i = 1; i <= bf.GetLength() ; i++)
-		if(bf.GetBit(i))
 
-			ostr << i ;  
+		ostr << bf.GetBit(i)<<' ';
+
     return ostr; 
 }

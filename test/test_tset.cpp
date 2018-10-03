@@ -2,6 +2,29 @@
 
 #include <gtest.h>
 
+TEST(TSet, MY_TEST_can_intersect_three_sets_of_equal_size)
+{
+	const int size = 5;
+	TSet set1(size), set2(size), set3(size), set4(size), expSet(size);
+	// set1 = {1, 2, 4}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(4);
+	// set2 = {0, 1, 2}
+	set2.InsElem(0);
+	set2.InsElem(1);
+	set2.InsElem(2);
+	//set3 = {1,2,3}
+	set3.InsElem(1);
+	set3.InsElem(2);
+	set3.InsElem(3);
+	set4 = set1 * set2 * set3;
+	// expSet = {1, 2}
+	expSet.InsElem(1);
+	expSet.InsElem(2);
+
+	EXPECT_EQ(expSet, set4);
+}
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;

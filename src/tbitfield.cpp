@@ -176,17 +176,19 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	int tmp;
-	if (BitLen > bf.BitLen)
-		tmp = BitLen;
-	else
-		tmp = bf.BitLen;
-	TBitField result(tmp);
-	for (int i = 0; i < MemLen; i++)
-		result.pMem[i] = pMem[i];
-	for (int i = 0; i < bf.MemLen; i++)
-		result.pMem[i] &= bf.pMem[i];
-	return result;
+	int tmp, bitlen;
+	if (bf.BitLen > BitLen) {
+		tmp = MemLen;
+		bitlen = bf.BitLen;
+	}
+	else {
+		tmp = bf.MemLen;
+		bitlen = BitLen;
+	}
+	TBitField crossing(bitlen);
+	for (int i = 0; i < tmp; i++)
+		crossing.pMem[i] = pMem[i] & bf.pMem[i];
+	return crossing;
 }
 
 TBitField TBitField::operator~(void) // отрицание
@@ -223,13 +225,14 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 	for (int i = 0; i < bf.BitLen; i++)
 	{
 		if (bf.GetBit(i) == bf.GetMemMask(i))
-		{
-			ostr << "1";
-		}
-		else
-		{
-			ostr << "0";
-		}
+			if ((bf.pMem[(int)(i / (sizeof(TELEM) * 8))] & bf.GetMemMask(i)) == bf.GetMemMask(i))
+			{
+				ostr << "1";
+			}
+			else
+			{
+				ostr << "0";
+			}
 	}
 	return ostr;
 }

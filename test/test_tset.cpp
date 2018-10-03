@@ -180,19 +180,19 @@ TEST(TSet, can_combine_two_sets_of_equal_size)
   const int size = 5;
   TSet set1(size), set2(size), set3(size), expSet(size);
   // set1 = {1, 2, 4}
-  set1.InsElem(1);
+  set1.InsElem(1); 
   set1.InsElem(2);
-  set1.InsElem(4);
+  set1.InsElem(4); 
   // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
+  set2.InsElem(0); 
+  set2.InsElem(1); 
+  set2.InsElem(2); 
+  set3 = set1 + set2; 
   // expSet = {0, 1, 2, 4}
-  expSet.InsElem(0);
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
+  expSet.InsElem(0); 
+  expSet.InsElem(1); 
+  expSet.InsElem(2); 
+  expSet.InsElem(4); 
 
   EXPECT_EQ(expSet, set3);
 }
@@ -294,4 +294,30 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet,can_combine_three_sets)
+{
+	const int size = 5;
+	TSet set1(size), set2(size), set3(size), set4(size), expSet(size);
+
+	// set1 = {1, 2, 3}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(3);
+
+	// set2 = {1, 3, 4}
+	set2.InsElem(1);
+	set2.InsElem(3);
+	set2.InsElem(4);
+
+	// set3 = {3, 4}
+	set3.InsElem(3);
+	set3.InsElem(4);
+	set4 = set1*set2*set3;
+
+	// expSet = {3}
+	expSet.InsElem(3);
+	
+	EXPECT_EQ(expSet, set4);
 }

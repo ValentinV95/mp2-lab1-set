@@ -309,3 +309,13 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, 3_and_equal_sizes)
+{
+	const int size = 3;
+	TBitField bf1(size), bf2(size), bf3(size), rez(size), ex(size);
+	bf1.SetBit(0);
+	bf2.SetBit(1);
+	bf3.SetBit(2);
+	rez = bf1&bf2&bf3;
+	EXPECT_EQ(rez, ex);
+}

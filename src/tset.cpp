@@ -109,16 +109,21 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-	TSet ts(s.MaxPower);
-	ts.BitField = BitField | s.BitField;
-	return ts;
+	int l;
+	if (MaxPower > s.MaxPower)
+		l = MaxPower;
+	else
+		l = s.MaxPower;
+	TSet res(l);
+	res.BitField = BitField | s.BitField;
+	return res;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	if (Elem > MaxPower)
 	{
-		throw "Wrong data";
+		throw "Неположительный элемент";
 	}
 	else
 	{
@@ -133,7 +138,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 {
 	if (Elem > MaxPower)
 	{
-		throw "Wrong data";
+		throw "Неположительный элемент";
 	}
 	else
 	{
@@ -161,12 +166,18 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
+	int k;
+	for (int i = 0; i < s.MaxPower; i++) {
+		istr >> k;
+		s.InsElem(k);
+	}
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.BitField;
+	for (int i = 0; i < s.MaxPower; i++)
+		if (s.BitField.GetBit(i) == 1)
+			ostr << i << ' ';
 	return ostr;
 }

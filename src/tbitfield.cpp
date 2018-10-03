@@ -205,18 +205,16 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator >> (istream &istr, TBitField &bf) // ввод
 {
-	string strtmp;
-	cin >> strtmp;
-	const char* tmp = strtmp.c_str();
-	TBitField b(strlen(tmp));
-	for (int i = 0; i < strlen(tmp); i++)
-	{
-		if (tmp[i] == '1')
-		{
-			b.SetBit(i);
-		}
+	int k;
+	for (int i = 0; i < bf.BitLen; i++) {
+		istr >> k;
+		while ((k != 1) && (k != 0))
+			istr >> k;
+		if (k == 1)
+			bf.SetBit(i);
+		else
+			bf.ClrBit(i);
 	}
-	bf = b;
 	return istr;
 }
 

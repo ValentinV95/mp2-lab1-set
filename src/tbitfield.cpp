@@ -17,7 +17,6 @@ TBitField::TBitField(int len)
 		BitLen = len;
 		MemLen = (BitLen - 1) / (8 * sizeof(TELEM)) + 1;
 		pMem = new TELEM[MemLen];
-	if (pMem !=NULL) 
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = 0;
 	}
@@ -27,7 +26,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
-		if (bf.pMem == 0)
+		if (bf.pMem == NULL)
 			throw ("Нулевой указатель (некорректный адрес массива pMem в памяти)");
 		else{
 			pMem = new TELEM[bf.MemLen];
@@ -116,11 +115,9 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
 		pMem = new TELEM[MemLen];
-		if (bf.pMem != NULL)
-			for (int i = 0; i < MemLen; i++)
-				pMem[i] = bf.pMem[i];
-		else throw ("Нулевой указатель (некорректный адрес массива pMem в памяти)");;
-}
+		for (int i = 0; i < MemLen; i++)
+			pMem[i] = bf.pMem[i];
+	}
 	return *this;
 
 		
@@ -175,18 +172,20 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 			merger.pMem[i] = bf.pMem[i];
 	return merger;
 }
-TBitField TBitField::operator&(const TBitField &bf) // операция "и"
+
+TBitField TBitField::operator &(const TBitField &bf) // операция "и"
 {
-	int len;
-	int k = 1;//флаг, к=1 -> BitLen > bf.BitLen, k=0 -> BitLen < bf.BitLen
-	if (BitLen < bf.BitLen)
-		k = 0;
-	if (k == 0)
-		len = bf.BitLen;
-	else
-		len = BitLen;
-	TBitField crossing(len);
-	for (int i = 0; i < crossing.MemLen; i++)
+	int memlen,bitlen;
+	if (bf.BitLen>BitLen){
+		memlen = MemLen;
+		bitlen = bf.BitLen;
+	}
+	else {
+		memlen = bf.MemLen;
+		bitlen = BitLen;
+	}
+	TBitField crossing(bitlen);
+	for (int i = 0; i < memlen; i++)
 		crossing.pMem[i] = pMem[i] & bf.pMem[i];
 	return crossing;
 }

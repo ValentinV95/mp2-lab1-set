@@ -2,7 +2,7 @@
 
 #include <gtest.h>
 
-TEST(TBitField, can_create_bitfield_with_positive_length)
+TEST(TBitField, can_create_bitfield_with_positive_length) 
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
@@ -309,3 +309,25 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, union_ABC)
+{
+	TBitField A(5);
+	TBitField B(5);
+	TBitField C(5);
+	TBitField Un(5);
+
+	A.SetBit(1);
+	A.SetBit(2);
+
+	B.SetBit(3);
+
+	C.SetBit(4);
+
+	Un.SetBit(1);
+	Un.SetBit(2);
+	Un.SetBit(3);
+	Un.SetBit(4);
+
+	EXPECT_EQ(Un, A | B | C);
+}
+

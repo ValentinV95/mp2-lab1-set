@@ -18,7 +18,7 @@ TBitField::TBitField(int len)
 			pMem[i]=0;
 	}
 	else
-		throw "";
+		throw "Not available large";
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -67,7 +67,7 @@ void TBitField::SetBit(const int n) // установить бит
 		pMem[a] = pMem[a] | Mask;
 	}
 	else
-		throw "";
+		throw "Not available index of element";
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -81,7 +81,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 		pMem[a] = pMem[a] & Mask;
 	} 
 	else
-		throw "";
+		throw "Not available index of element";
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
@@ -95,7 +95,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 		return 0;
 	}
 	else
-		throw "";
+		throw "Not available index of element";
 }
 
 // битовые операции
@@ -121,7 +121,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	if (BitLen == bf.BitLen)
 		while (i < BitLen, k)
 		{
-			if (pMem[i] != bf.pMem[i])
+			if (GetBit(i) != bf.GetBit(i))
 				k = 0;
 			i++;
 		}
@@ -142,14 +142,23 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 	max = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
 	TBitField a(max);
 	for (int i = 0; i < min; i++)
-		a.pMem[i] = pMem[i] | bf.pMem[i];
+		if (GetBit(i) | bf.GetBit(i))
+			a.SetBit(i);
+		else
+			a.ClrBit(i);
 	k = (BitLen < bf.BitLen) ? 1 : 0;
 	if (k)
 		for (int i = min; i < max; i++)
-			a.pMem[i] = bf.pMem[i];
+			if (bf.GetBit(i))
+				a.SetBit(i);
+			else
+				a.ClrBit(i);
 	else
 		for (int i = min; i < max; i++)
-			a.pMem[i] = pMem[i];
+			if (GetBit(i))
+				a.SetBit(i);
+			else
+				a.ClrBit(i);
 	return(a);
 }
 
@@ -159,7 +168,10 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 	min = (BitLen < bf.BitLen) ? BitLen : bf.BitLen;
 	TBitField a(min);
 	for (int i = 0; i < min; i++)
-		a.pMem[i] = pMem[i] & bf.pMem[i];
+		if (GetBit(i)&bf.GetBit(i))
+			a.SetBit(i);
+		else
+			a.ClrBit(i);
 	return(a);
 }
 
@@ -184,10 +196,13 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	for (int i=0; i < bf.BitLen; i++) 
 	{
 		istr >> l;
-		if (l)
-			bf.SetBit(i);
+		if ((l%10=l) &&(!=01)
+			if (l)
+				bf.SetBit(i);
+			else
+				bf.ClrBit(i);
 		else
-			bf.ClrBit(i);
+			throw"Enter only 1 bit"
 	}
 
 	return(istr);

@@ -110,14 +110,14 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 	if (BitLen != bf.BitLen) return 0;
 
 	for (int i = 0; i < BitLen; i++) {
-		if ((*this).GetBit(i) == bf.GetBit(i))
-			flag = 1;
-		else 
-			flag = 0;	
+		if (GetBit(i) != bf.GetBit(i))
+			flag++;
+		else
+			continue;
 	}
 	
-	if (flag) return 1;
-		else return 0;
+	if (flag) return 0;
+		else return 1;
 	
 }
 
@@ -130,17 +130,17 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
 	int flag;
-	if (BitLen >= bf.BitLen) flag = 1;
-		else flag = 0;
-
-	int n;
-	if (flag) n = BitLen;
-		else n = bf.BitLen;
+	if (BitLen >= bf.BitLen) 
+		flag = 1;
+	else 
+		flag = 0;
 
 	int m;
-	if (flag) m = bf.BitLen;
-		else m = BitLen;
-
+	if (flag) 
+		m = bf.BitLen;
+	else 
+		m = BitLen;
+	
 	TBitField res = flag ? (*this) : bf;
 	
 	for (int i = 0; i < m; i++) {

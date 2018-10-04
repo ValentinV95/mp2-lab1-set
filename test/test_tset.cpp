@@ -295,3 +295,28 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, union_ABC)
+{
+	TSet A(10);
+	TSet B(10);
+	TSet C(10);
+	TSet Un(10);
+
+	A.InsElem(1);
+	A.InsElem(2);
+
+	B.InsElem(3);
+
+	C.InsElem(4);
+	C.InsElem(5);
+	C.InsElem(6);
+
+	Un.InsElem(1);
+	Un.InsElem(2);
+	Un.InsElem(3);
+	Un.InsElem(4);
+	Un.InsElem(5);
+	Un.InsElem(6);
+
+	EXPECT_EQ(Un, A+B+C);
+}

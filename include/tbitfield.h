@@ -9,7 +9,7 @@
 #define __BITFIELD_H__
 
 #include <iostream>
-
+#include "locale.h"
 using namespace std;
 
 typedef unsigned int TELEM;

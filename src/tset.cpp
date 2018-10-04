@@ -96,8 +96,8 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 		TSet ORELEM(MaxPower);
-		BitField.SetBit(Elem);
-		ORELEM.BitField = BitField;
+	//	BitField.SetBit(Elem);
+		ORELEM.BitField.SetBit(Elem);
 		return ORELEM;
 }
 
@@ -131,12 +131,18 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
+	int k;
+	for (int i = 0; i < s.MaxPower; i++) {
+		istr >> k;
+		s.InsElem(k);
+	}
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr <<  s.BitField;
+	for (int i = 0; i < s.MaxPower; i++)
+		if (s.BitField.GetBit(i) == 1)
+			ostr << i << ' ';
 	return ostr;
 }

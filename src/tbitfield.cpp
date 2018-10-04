@@ -179,16 +179,18 @@ TBitField TBitField::operator~(void) // отрицание
 
 // ввод/вывод
 
-istream &operator>>(istream &istr, TBitField &bf) // ввод
+istream &operator >> (istream &istr, TBitField &bf) // ввод
 {
-	string strtmp;
-	cin >> strtmp;
-	const char* tmp = strtmp.c_str();
-	TBitField b(strlen(tmp));
-	for (int i = 0; i < strlen(tmp); i++)
-		if (tmp[i] == '1')
-			b.SetBit(i);
-	bf = b;
+	int k;
+	for (int i = 0; i < bf.BitLen; i++) {
+		istr >> k;
+		while ((k != 1) && (k != 0))
+			istr >> k;
+		if (k == 1)
+			bf.SetBit(i);
+		else
+			bf.ClrBit(i);
+	}
 	return istr;
 }
 
@@ -196,10 +198,15 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
 	for (int i = 0; i < bf.BitLen; i++)
 	{
-		if ((bf.pMem[(int)(i / (sizeof(TELEM) * 8))] & bf.GetMemMask(i)) == bf.GetMemMask(i))
-			ostr << "1";
-		else
-			ostr << "0";
+		if (bf.GetBit(i) == bf.GetMemMask(i))
+			if ((bf.pMem[(int)(i / (sizeof(TELEM) * 8))] & bf.GetMemMask(i)) == bf.GetMemMask(i))
+			{
+				ostr << "1";
+			}
+			else
+			{
+				ostr << "0";
+			}
 	}
 	return ostr;
 }

@@ -100,7 +100,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	if (Elem > MaxPower)
-		throw "Индекс бита не положительный или превышает размер битового поля";
+		throw "Wrong data";
 	else
 	{
 		TSet ts(MaxPower);
@@ -140,12 +140,18 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
+	int n;
+	for (int i = 0; i < s.MaxPower; i++) {
+		istr >> n;
+		s.InsElem(n);
+	}
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.BitField;
+	for (int i = 0; i < s.MaxPower; i++)
+		if (s.BitField.GetBit(i) == 1)
+			ostr << i << ' ';
 	return ostr;
 }

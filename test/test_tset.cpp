@@ -295,3 +295,14 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, add_operator)
+{
+	TSet m(6), n(6), k(6), tmp(6), M(6);
+	m.InsElem(1);
+	n.InsElem(2);
+	k.InsElem(3);
+	M.InsElem(1);
+	M.InsElem(2);
+	M.InsElem(3);
+	EXPECT_EQ(M, m+n+k);
+}

@@ -273,9 +273,9 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-	for (unsigned int i = 0; i < bf.MemLen; i++)
+	for (unsigned int i = 0; i < bf.BitLen; i++)
 	{
-		ostr << bf.pMem[i];
+		ostr << bf.GetBit(i) << " ";
 	}
 	ostr << endl;
 	return ostr;

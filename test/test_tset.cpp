@@ -295,3 +295,26 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+
+TEST(TSet, obidenenie)
+{
+	TSet bf1(10);
+	bf1.InsElem(0);
+	bf1.InsElem(1);
+	TSet bf2(10);
+	bf2.InsElem(1);
+	bf2.InsElem(3);
+	bf2.InsElem(4);
+	TSet bf3(10);
+	bf3.InsElem(2);
+	TSet bf4(10);
+	bf4.InsElem(0);
+	bf4.InsElem(1);
+	bf4.InsElem(2);
+	bf4.InsElem(3);
+	bf4.InsElem(4);
+
+
+	EXPECT_EQ(bf4, bf1 + bf2 + bf3);
+}

@@ -164,7 +164,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	int min;
+	int min, max;
 	min = (BitLen < bf.BitLen) ? BitLen : bf.BitLen;
 	max = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
 	TBitField a(max);
@@ -198,8 +198,9 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 	int l;
 	for (int i=0; i < bf.BitLen; i++) 
 	{
-		istr >> l>>endl;
-		if ((l%10=l) &&(!=01))
+		istr >> l;
+		cout << endl;
+		if ((l%10)==l)
 			if (l)
 				bf.SetBit(i);
 			else

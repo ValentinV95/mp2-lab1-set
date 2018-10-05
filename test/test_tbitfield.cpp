@@ -309,3 +309,37 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, double_clrbit)
+{
+	unsigned int size = 2;
+	TBitField bf1(size), bf2(size);
+	for (int i = 0; i < size; i++)
+	{
+		bf1.ClrBit(i);
+		bf1.ClrBit(i);
+		bf2.ClrBit(i);
+	}
+	EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, re_or)
+{
+	unsigned int size = 2;
+	TBitField bf3(size), bf1(size), bf2(size);
+	for (int i = 0; i < size; i++)
+	{
+		bf1.ClrBit(i);
+		bf3.ClrBit(i);
+		bf2.ClrBit(i);
+	}
+
+	TBitField bf4(size);
+	for (int i = 0; i < size; i++)
+	{
+		bf4.ClrBit(i);
+
+	}
+	EXPECT_EQ(bf4, bf1 | bf2 | bf3);
+}
+

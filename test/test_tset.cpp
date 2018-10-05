@@ -295,3 +295,12 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, re_plus)
+{
+	TSet s1(3), s2(3), s3(3), s4(3);
+	s1.InsElem(0);
+	s2.InsElem(0);
+	s3.InsElem(0);
+	s4.InsElem(0);
+	EXPECT_EQ(s1, s2 + s3 + s4);
+}

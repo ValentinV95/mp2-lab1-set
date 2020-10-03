@@ -1,0 +1,26 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  tset.cpp
+  tbitfield.cpp
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(21,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(101,29): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(111,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(122,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(132,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(137,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(144,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(156,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(163,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(172,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(188,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(195,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(255,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(266,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(282,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(293,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(308,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(315,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(329,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
+D:\lab\mp2-lab1-set\src\tset.cpp(98): warning C4715: TSet::operator-: значение возвращается не при всех путях выполнения
+D:\lab\mp2-lab1-set\src\tset.cpp(83): warning C4715: TSet::operator+: значение возвращается не при всех путях выполнения
+  bitfield.vcxproj -> D:\lab\mp2-lab1-set\sln\vc9\Debug\bitfield.lib

@@ -78,7 +78,7 @@ TSet TSet::operator+(const int Elem)
 	}
 	else
 	{
-		cout << endl << Elem << MaxPower << endl;
+		throw "Elem > maxpPower";
 	}
 }
 
@@ -93,7 +93,7 @@ TSet TSet::operator-(const int Elem)
 	}
 	else
 	{
-		cout << endl << Elem << MaxPower << endl;
+		throw "Elem > Maxpower";
 	}
 }
 

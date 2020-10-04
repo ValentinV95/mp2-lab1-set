@@ -4,7 +4,7 @@ TBitField::TBitField(int len)
 {
 	if (len < 0)
 	{
-		cout << "Error: u input size < 0" << endl;
+		throw "Error: u input size < 0";
 	}
 
 	this->BitLen = len;
@@ -28,7 +28,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 {
 	if ((n < 0) || (n >= BitLen))
 	{
-		cout << "(n < 0) || (n >= BitLen)" << endl;
+		throw "(n < 0) || (n >= BitLen)";
 	}
 		
 	return (n / (sizeof(TELEM) * 8));
@@ -39,7 +39,7 @@ TELEM TBitField::GetMemMask(const int n) const
 {
 	if ((n < 0) || (n >= BitLen))
 	{
-		cout << "(n < 0) || (n >= BitLen)" << endl;
+		throw "(n < 0) || (n >= BitLen)";
 	}
 	return 1 << (n & (sizeof(TELEM) * 8 - 1));
 }
@@ -56,7 +56,7 @@ void TBitField::SetBit(const int n)
 {
 	if ((n > BitLen) || (n < 0))
 	{
-		cout << "(n > BitLen) || (n < 0)" << endl;
+		throw "(n > BitLen) or (n < 0)";
 	}	
 																														//с data[область памяти iого бита] логическое или, чтобы прибавить вместо нулей единицы от числа (1 << (i % (sizeof(uchar) * 8))
 	pMem[(n / (sizeof(TELEM) * 8))] = pMem[(n / (sizeof(TELEM) * 8))] | (1 << (n % (sizeof(TELEM) * 8))); 				//пример : 1 на 3 месте (начиная с 0ой) -> (1 << (i % (sizeof(uchar) * 8)) = 8 = 1000(3 % (sizeof(uchar) * 8) =
@@ -67,7 +67,7 @@ void TBitField::ClrBit(const int n)
 {
 	if ((n > BitLen) || (n < 0))
 	{
-		cout << "(n > BitLen) || (n < 0)" << endl;
+		throw "(n > BitLen) or (n < 0)";
 	}
 		
 	pMem[(n / (sizeof(TELEM) * 8))] = pMem[(n / (sizeof(TELEM) * 8))] & ~(1 << (n % (sizeof(TELEM) * 8)));
@@ -76,13 +76,18 @@ void TBitField::ClrBit(const int n)
 // получить значение бита
 int TBitField::GetBit(const int n) const 
 {
+	if ((n > BitLen) || (n < 0))
+	{
+		throw "(n > BitLen) or (n < 0)";
+	}
+
 	return ((pMem[(n / (sizeof(TELEM) * 8))] & (1 << (n % (sizeof(TELEM) * 8))))) ? 1 : 0;
 }
 
 //Операции-методы
 void TBitField::or_b(const TBitField& bf)
 {
-	if (MemLen >= bf.MemLen)
+	if (BitLen >= bf.BitLen)
 	{
 		for (int i = 0; i < bf.MemLen; i++)
 		{
@@ -117,7 +122,7 @@ void TBitField::or_b(const TBitField& bf)
 
 void TBitField::and_b(const TBitField& bf)
 {
-	if (MemLen == bf.MemLen)
+	if (BitLen == bf.BitLen)
 	{
 		for (size_t i = 0; i < bf.MemLen; i++)
 		{
@@ -151,7 +156,7 @@ void TBitField::and_b(const TBitField& bf)
 
 void TBitField::sub_b(const TBitField& bf)
 {
-	if (MemLen >= bf.MemLen)
+	if (BitLen >= bf.BitLen)
 	{
 		for (size_t i = 0; i < bf.MemLen; i++)
 		{
@@ -213,14 +218,14 @@ int TBitField::operator==(const TBitField &bf) const
 		for (int i = 0; i < MemLen; i++)
 		{
 		
-			if (pMem[i] != bf.pMem[i])
+			if (GetBit(i) != bf.GetBit(i))
 			{	
 				return 0;
 			}
 		}
-	}
 
-	return 1;
+		return 1;
+	}
 }
 
 // сравнение
@@ -235,6 +240,8 @@ int TBitField::operator!=(const TBitField &bf) const
 			{
 				return 1;
 			}
+
+			return 0;
 		}
 	}
 	else
@@ -248,7 +255,7 @@ int TBitField::operator!=(const TBitField &bf) const
 // операция "или"
 TBitField TBitField::operator|(const TBitField &bf) 
 {
-	if (MemLen >= bf.MemLen)
+	if (BitLen >= bf.BitLen)
 	{
 		TBitField tmp(*this);
 
@@ -275,7 +282,7 @@ TBitField TBitField::operator|(const TBitField &bf)
 // операция "и"
 TBitField TBitField::operator&(const TBitField &bf) 
 {
-	if (MemLen >= bf.MemLen)
+	if (BitLen >= bf.BitLen)
 	{
 		TBitField tmp(*this);
 
@@ -303,7 +310,7 @@ TBitField TBitField::operator-(const TBitField& bf)
 {
 	TBitField tmp(*this);
 
-	if (MemLen >= bf.MemLen)
+	if (BitLen >= bf.BitLen)
 	{
 		for (size_t i = 0; i < bf.MemLen; i++)
 		{

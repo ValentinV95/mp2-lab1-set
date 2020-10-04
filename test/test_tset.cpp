@@ -76,13 +76,13 @@ TEST(TSet, Check_GetMaxPower)
     EXPECT_EQ(set.GetMaxPower(), size);
 }
 //4) Проверка на задание элемента InsElem
-TEST(TSet, Check_GetMaxPower)
+TEST(TSet, Check_when_is_member_3_is_1Bit)
 {
     int size = 6;
     TSet set(size);
     set.InsElem(3);
 
-    EXPECT_EQ(set.IsMember, 1);
+    EXPECT_EQ(set.IsMember(3), 1);
 }
 //5)Присваивание
 TEST(TSet, Check_equally)

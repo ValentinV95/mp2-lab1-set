@@ -1,23 +1,24 @@
 ﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
   tset.cpp
   tbitfield.cpp
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(21,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(106,29): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(116,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(127,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(137,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(142,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(149,25): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(161,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(168,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(177,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(193,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(200,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(262,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(273,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(289,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(300,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(315,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(322,24): warning C4018: <: несоответствие типов со знаком и без знака
+D:\lab\mp2-lab1-set\src\tbitfield.cpp(336,23): warning C4018: <: несоответствие типов со знаком и без знака
   Создание кода...
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(24): error C4716: TBitField::GetMemIndex: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(28): error C4716: TBitField::GetMemMask: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(72): error C4716: TBitField::operator&: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(76): error C4716: TBitField::operator~: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(82): error C4716: operator>>: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(86): error C4716: operator<<: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(54): error C4716: TBitField::operator=: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tbitfield.cpp(68): error C4716: TBitField::operator|: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(26): error C4716: TSet::operator TBitField: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(30): error C4716: TSet::GetMaxPower: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(49): error C4716: TSet::operator=: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(58): error C4716: TSet::operator!=: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(62): error C4716: TSet::operator+: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(66): error C4716: TSet::operator+: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(74): error C4716: TSet::operator*: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(70): error C4716: TSet::operator-: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(78): error C4716: TSet::operator~: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(88): error C4716: operator<<: должна возвращать значение
-D:\lab\mp2-lab1-set\src\tset.cpp(84): error C4716: operator>>: должна возвращать значение
+  bitfield.vcxproj -> D:\lab\mp2-lab1-set\sln\vc10\Debug\bitfield.lib

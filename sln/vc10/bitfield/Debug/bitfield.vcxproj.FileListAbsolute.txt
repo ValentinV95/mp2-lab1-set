@@ -1,0 +1,2 @@
+C:\Users\Арина\mp2-lab1-set\sln\vc10\Debug\bitfield.pdb
+C:\Users\Арина\mp2-lab1-set\sln\vc10\bitfield\Debug\bitfield.pdb

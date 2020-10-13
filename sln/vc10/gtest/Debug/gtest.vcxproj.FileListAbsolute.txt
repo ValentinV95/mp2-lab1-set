@@ -1,0 +1,2 @@
+C:\Users\Арина\mp2-lab1-set\sln\vc10\Debug\gtest.pdb
+C:\Users\Арина\mp2-lab1-set\sln\vc10\gtest\Debug\gtest.pdb

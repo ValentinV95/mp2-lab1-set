@@ -10,7 +10,7 @@
 #include <iostream>
 
 using namespace std;
-typedef unsigned char TELEM;
+typedef unsigned int TELEM;
 
 class TBitField
 {
@@ -33,19 +33,12 @@ public:
   void ClrBit(const int n);       // очистить бит                         
   int  GetBit(const int n) const; // получить значение бита               
 
-  // битовые операции
-  void or_b(const TBitField& bf);
-  void and_b(const TBitField& bf);
-  void sub_b(const TBitField& bf);
-  void un_sub_b();
-
  //операции
   int operator==(const TBitField &bf) const; // сравнение                 
   int operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              
   TBitField  operator|(const TBitField &bf); // операция "или"            
   TBitField  operator&(const TBitField &bf); // операция "и" 
-  TBitField  operator-(const TBitField& bf); // операция "исключающее или"
   TBitField  operator~(void);                // отрицание                  
 
   //ввод-вывод

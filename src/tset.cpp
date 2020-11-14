@@ -111,20 +111,14 @@ TSet TSet::operator~(void)
 
 // перегрузка ввода/вывода
 // ввод
-istream &operator>>(istream &istr, TSet &s) 
+istream& operator>>(istream& istr, TSet& s)
 {
-	int el;
-	for (int i = 0; i < s.GetMaxPower(); i++)
-	{
-		istr >> el;
-		s.InsElem(el);
-	}
-
+	istr >> s.BitField;
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.BitField << ' ';
+	ostr << s.BitField;
 	return ostr;
 }

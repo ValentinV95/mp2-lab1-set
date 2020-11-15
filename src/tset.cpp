@@ -127,6 +127,7 @@ TSet TSet::operator*(const TSet &s) // пересечение
 
 TSet TSet::operator~(void) // дополнение
 {
+    return *this;
 }
 
 // перегрузка ввода/вывода

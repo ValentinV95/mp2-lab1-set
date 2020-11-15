@@ -1,7 +1,31 @@
 #include "tset.h"
 
 #include <gtest.h>
+TEST(TSet, can_create_empty_set)
+{
+    TSet set(1);
+    EXPECT_EQ(set.IsMember(0), 0);
+}
+TEST(TSet, Check_GetMaxPower)
+{
+    int size = 6;
+    TSet set(size);
 
+    EXPECT_EQ(set.GetMaxPower(), size);
+}
+TEST(TSet, Check_sub_el)
+{
+    int size = 6;
+    TSet set(size);
+    set.InsElem(3);
+    set.InsElem(4);
+    TSet set1(size);
+    set1.InsElem(3);
+    TSet set2(size);
+    set2 = set - 4;
+
+    EXPECT_EQ(set2, set1);
+}
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;

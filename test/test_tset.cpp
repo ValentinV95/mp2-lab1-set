@@ -295,3 +295,18 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, Check_GetMaxPower)
+{
+    int size = 2;
+    TSet set(size);
+    EXPECT_EQ(set.GetMaxPower(), size);
+}
+
+TEST(TSet, can_create_empty_set)
+{
+    TSet set(1);
+    EXPECT_EQ(set.IsMember(0), 0);
+}
+
+

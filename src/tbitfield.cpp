@@ -17,9 +17,15 @@ TBitField::TBitField(int len)
 		pMem = new TELEM[MemLen];
 		memset(pMem, 0, MemLen);
 	}
-	/*if (if (pMem != NULL)
-	for (int i = 0; i < MemLen; i++)
-		pMem[i] = 0;*/
+	else 
+	{
+		throw " zero or negative length ";
+	}
+	if (pMem != NULL)
+	{
+		for (int i = 0; i < MemLen; i++)
+			pMem[i] = 0;
+	}
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -64,6 +70,10 @@ void TBitField::SetBit(const int n) // установить бит
 		pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] | GetMemMask(n);
 
 	}
+	else
+	{
+		throw " cannot_set_bit_with_negative_index";
+	}
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -74,15 +84,22 @@ void TBitField::ClrBit(const int n) // очистить бит
 		int i = GetMemIndex(n);
 		pMem[i] = pMem[i] & ~GetMemMask(n);
 	}
+	else
+	{
+		throw " cannot_clr_bit_with_negative_index";
+	}
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if ((n > -1) && (n < BitLen))
-	
-		return pMem[ GetMemIndex(n)] & GetMemMask(n);
-		
-		 return 0;
+	{
+		return pMem[GetMemIndex(n)] & GetMemMask(n);
+	}
+		else
+		{
+			throw " cannot_get_bit_with_incorrect_index";
+		}
 }
 
 // битовые операции
@@ -102,6 +119,10 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 		{
 			pMem[i] = bf.pMem[i];
 		}
+	else
+	{
+		throw" no memory ";
+	}
 
 return *this;
 
@@ -200,9 +221,14 @@ TBitField TBitField::operator~(void) // отрицание
 {
 	int len = BitLen;
 	TBitField tmp(len);
-	for (int i = 0; i < MemLen; i++)
+	/*for (int i = 0; i < MemLen; i++)
 	{
 		tmp.pMem[i] = ~pMem[i];
+	}*/
+	for ( int i = 0; i < BitLen; i++)
+	{
+		if (this->GetBit(i) == 0)
+			tmp.SetBit(i);
 	}
 	return tmp;
 }

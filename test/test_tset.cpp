@@ -1,10 +1,27 @@
 #include "tset.h"
 
 #include <gtest.h>
+TEST(TSet, Check_equal)
+{
+    int size = 6;
+    TSet set(size);
+    set.InsElem(3);
+    TSet set1 = set;
+
+    EXPECT_EQ(set1, set);
+}
+
 TEST(TSet, can_create_empty_set)
 {
     TSet set(1);
     EXPECT_EQ(set.IsMember(0), 0);
+}
+TEST(TSet, can_GetMaxPower)
+{
+    int size = 7;
+    TSet set(size);
+
+    EXPECT_EQ(set.GetMaxPower(), size);
 }
 TEST(TSet, Check_GetMaxPower)
 {

@@ -13,7 +13,7 @@ TSet::TSet(int mp) : BitField(mp)
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(s.Bitfield)
+TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
     MaxPower = s.MaxPower;
 }
@@ -120,7 +120,7 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
     int i = 0;
     while (i < s.MaxPower)
     {
-        if (s.IsMember)
+        if (s.IsMember(i))
         {
             ostr << i << ' ';
         }

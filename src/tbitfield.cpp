@@ -69,8 +69,10 @@ void TBitField::ClrBit(const int n) // очистить бит
     if ((n >= BitLen) || (n < 0)) {
         throw n;
     }
-    int index = GetMemIndex(n);
-    pMem[index] = (GetMemMask(n) ^ pMem[index]);
+    if (GetBit(n) == 1) {
+        int index = GetMemIndex(n);
+        pMem[index] = (GetMemMask(n) ^ pMem[index]);
+    }
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
@@ -90,6 +92,8 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
     if (this == &bf)
         return *this;
 
+    delete[] pMem;
+    pMem = 0;
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
     pMem = new TELEM[MemLen];
@@ -142,7 +146,6 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
         TBitField tmp(BitLen);
         for (size_t i = 0; i < bf.BitLen; i++) {
             if ((GetBit(i) == 1) && (bf.GetBit(i) == 1)) {
-                std::cout << GetBit(i) << "  " << bf.GetBit(i) << endl;
                 tmp.SetBit(i);
             }
         }

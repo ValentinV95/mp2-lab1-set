@@ -9,7 +9,7 @@
 
 TBitField::TBitField(int len)
 {
-	if (len < 0)
+	if (len <= 0)
 		throw "Len isn't correct";
 	BitLen = len;
 	MemLen = BitLen / (sizeof(TELEM) * 8) + 1;

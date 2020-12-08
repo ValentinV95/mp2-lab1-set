@@ -26,6 +26,10 @@ TBitField::TBitField(int len)
 		for (int i = 0; i < MemLen; i++)
 			pMem[i] = 0;
 	}
+	else
+	{
+		throw " no memory";
+	}
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -228,7 +232,14 @@ TBitField TBitField::operator~(void) // отрицание
 	for ( int i = 0; i < BitLen; i++)
 	{
 		if (this->GetBit(i) == 0)
+		{
 			tmp.SetBit(i);
+		}
+		else
+		{
+			tmp.ClrBit(i);
+		}
+
 	}
 	return tmp;
 }

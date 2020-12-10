@@ -234,34 +234,24 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-    string temp;
-    istr >> temp;
-    if (temp.size() != bf.GetLength())
-        throw "Incorrect length";
-    else
+    int l;
+    for (int i = 0; i < bf.BitLen; i++)
     {
-        for (int i = 0; i < bf.GetLength(); i++)
-        {
-            if (temp[i] == '0')
-                bf.ClrBit(i);
+        istr >> l;
+        cout << endl;
+        if ((l % 10) == l)
+            if (l)
+                bf.SetBit(i);
             else
-                if (temp[i] == '1')
-                    bf.SetBit(i);
-                else
-                    throw "Incorrect enter";
-        }
-        return istr;
+                bf.ClrBit(i);
     }
+    return (istr);
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-    for (int i = 0; i < bf.BitLen; i++)
-    {
-        if (bf.GetBit(i))
-            ostr << 1;
-        else
-            ostr << 0;
-    }
+    for (int i = 0; i < bf.GetLength(); i++)
+        if (bf.GetBit(i)) ostr << '1';
+        else ostr << '0';
     return ostr;
 }

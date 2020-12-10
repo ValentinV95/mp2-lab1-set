@@ -137,17 +137,22 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int i;
-    cin >> i;
-    for (; (i > -1) && (i < s.MaxPower); cin >> i)
+    int l;
+    istr >> l;
+    for (int i = 0; i < s.MaxPower; i++) 
     {
-        s.BitField.SetBit(i);
+        istr >> l;
+        s.InsElem(l);
     }
     return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-    ostr << s.BitField << ' ';
+    for (int i = 0; i < s.MaxPower; i++)
+    {
+        if (s.BitField.GetBit(i))
+            ostr << i << endl;
+    }
     return ostr;
 }

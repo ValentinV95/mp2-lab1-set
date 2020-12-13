@@ -86,9 +86,14 @@ int TBitField::GetBit(const int n) const // получить значение б
 		throw "Invalid position";
 	}
 	return pMem[GetMemIndex(n)] & GetMemMask(n);
-	/*int i = GetMemIndex(n);
-	TELEM m = GetMemMask(n);
-	return pMem[i] & m;*/
+	int tmp;
+	tmp = GetMemIndex(n);
+	if (pMem[tmp] & GetMemMask(n))
+	{
+		return 1;
+	}
+	else
+		return 0;
 }
 
 // битовые операции

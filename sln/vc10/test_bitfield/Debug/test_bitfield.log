@@ -1,2 +1,0 @@
-﻿test_main.obj : warning LNK4075: не учитывается "/EDITANDCONTINUE" из-за спецификации "/SAFESEH"
-  test_bitfield.vcxproj -> C:\Users\Acer\Desktop\ЛабРаб_2сем_Set\mp2-lab1-set\sln\vc10\Debug\test_bitfield.exe

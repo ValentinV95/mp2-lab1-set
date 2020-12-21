@@ -130,12 +130,13 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
   }
     else
     {
-        for(int i=0; i<MemLen; i++)
+        for(int i=0; i<MemLen && i<bf.MemLen; i++)
+            if (pMem[i] != bf.pMem[i])
         {
             return 1;
         }
     }
-  else
+
       return 0;
 }
 

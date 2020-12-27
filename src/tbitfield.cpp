@@ -85,7 +85,6 @@ int TBitField::GetBit(const int n) const // получить значение б
 	{
 		throw "Invalid position";
 	}
-	return pMem[GetMemIndex(n)] & GetMemMask(n);
 	int tmp;
 	tmp = GetMemIndex(n);
 	if (pMem[tmp] & GetMemMask(n))

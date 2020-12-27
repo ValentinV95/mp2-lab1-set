@@ -309,3 +309,14 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, double_inverted_bitfield_equal_to_original)
+{
+    const int size = 2;
+    TBitField bf(size), negBf(size);
+
+    bf.SetBit(1);
+    negBf = ~~bf;
+
+    EXPECT_EQ(bf, negBf);
+}

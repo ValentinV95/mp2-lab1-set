@@ -295,3 +295,14 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TBitField, double_inverted_set_equal_to_original)
+{
+	const int size = 5;
+	TSet set(size), negSet(size);
+
+	set.InsElem(1);
+	negSet = ~~set;
+
+	EXPECT_EQ(set, negSet);
+}

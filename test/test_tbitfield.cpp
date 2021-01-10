@@ -309,23 +309,3 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
-
-TEST(TBitField, a_bit_field_with_a_non_zero_bit_is_not_equal_to_itself_without_a_bit)
-{
-    const int size = 2;
-    TBitField bf1(size), bf2(size);
-
-    bf2 = bf1;
-    bf1.SetBit(1);
-
-    EXPECT_NE(bf1, bf2);
-}
-
-TEST(TBitField, the_bit_field_is_equal_to_the_copied_bit_field)
-{
-    const int size = 2;
-    TBitField bf1(size);
-    TBitField bf2(bf1);
-
-    EXPECT_EQ(bf1, bf2);
-}

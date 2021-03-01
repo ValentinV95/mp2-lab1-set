@@ -1,0 +1,3 @@
+﻿cl : командная строка warning D9035: использование параметра "Gm" нежелательно, он будет удален в следующих выпусках
+  gtest-all.cc
+C:\Users\Reizzz\Documents\GitHub\mp2-lab1-set\gtest\gtest-all.cc : fatal error C1073: Внутренняя ошибка при выполнении добавочной компиляции (файл компилятора: d:\agent\_work\4\s\src\vctools\Compiler\CxxFE\sl\p1\c\main.c, строка: 1030)

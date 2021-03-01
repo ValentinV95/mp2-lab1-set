@@ -1,252 +1,104 @@
 #include "tset.h"
-TBitField::TBitField(int len)
+TSet::TSet(int mp) : BitField(mp)
 {
-	if (len < 0)
-	{
-		throw "Negative meaning";
-	}
-	else
-	{
-		BitLen = len;
-		MemLen = (BitLen + sizeof(TELEM) * 8 - 1) / (sizeof(TELEM) * 8);
-		pMem = new TELEM[MemLen];
-		memset(pMem, 0, MemLen);
-	}
+    MaxPower = mp;
 }
 
-TBitField::TBitField(const TBitField& bf) // конструктор копирования
+// конструктор копирования
+TSet::TSet(const TSet& s) : BitField(s.BitField)
 {
-	BitLen = bf.BitLen;
-	MemLen = bf.MemLen;
-	pMem = new TELEM[MemLen];
-	for (int i = 0; i < MemLen; i++)
-	{
-		this->pMem[i] = bf.pMem[i];
-	}
+    MaxPower = s.MaxPower;
 }
-
-TBitField::~TBitField()
+// конструктор преобразования типа
+TSet::TSet(const TBitField& bf) : BitField(bf)
 {
-	delete pMem;
-	pMem = NULL;
+    MaxPower = bf.GetLength();
 }
-
-int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
+TSet::operator TBitField()
 {
-	if ((n > -1) && (n < BitLen))
-	{
-		return (n / (sizeof(TELEM) * 8));
-
-	}
-	else
-		throw "the bit does not exist";
+    TBitField temp(this->BitField);
+    return temp;
 }
-
-TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
+int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
-	if ((n < 0) || (n >= BitLen))
-	{
-		throw "(n < 0) || (n >= BitLen)";
-	}
-	return 1 << (n & (sizeof(TELEM) * 8 - 1));
+    return MaxPower;
 }
-
-// доступ к битам битового поля
-
-int TBitField::GetLength(void) const // получить длину (к-во битов)
+int TSet::IsMember(const int Elem) const // элемент множества?
 {
-
-	return BitLen;
+    return BitField.GetBit(Elem);
 }
-
-void TBitField::SetBit(const int n) // установить бит
+void TSet::InsElem(const int Elem) // включение элемента множества
 {
-	if ((n > -1) && (n < BitLen))
-	{
-		int index;
-		index = GetMemIndex(n);
-		pMem[index] |= GetMemMask(n);
-
-	}
-	else
-		throw "the bit does not exist";
+    BitField.SetBit(Elem);
 }
-
-void TBitField::ClrBit(const int n) // очистить бит
+void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-	if ((n > -1) && (n < BitLen))
-	{
-		int index;
-		index = GetMemIndex(n);
-		pMem[index] &= (~(GetMemMask(n)));
-
-	}
-	else
-		throw "the bit does not exist";
+    BitField.ClrBit(Elem);
 }
-
-int TBitField::GetBit(const int n) const // получить значение бита
+// теоретико-множественные операции
+TSet& TSet::operator=(const TSet& s) // присваивание
 {
-
-	if ((n > -1) && (n < BitLen))
-	{
-		int index;
-			index = GetMemIndex(n);
-			if (pMem[index] & GetMemMask(n))
-			{
-				return 1;
-			}
-			else
-				return 0;
-	}
-	else
-		throw "the bit does not exist";
+    BitField = s.BitField;
+    MaxPower = s.MaxPower;
+    return *this;
 }
-
-// битовые операции
-
-TBitField& TBitField::operator=(const TBitField& bf) // присваивание
+int TSet::operator==(const TSet& s) const // сравнение
 {
-	if (BitLen != bf.BitLen)
-	{
-		delete[]pMem;
-		this->BitLen = bf.BitLen;
-		this->MemLen = bf.MemLen;
-		this->pMem = new TELEM[MemLen];
-	}
-	for (int i = 0; i < MemLen; i++)
-	{
-		pMem[i] = bf.pMem[i];
-	}
-	return *this;
+    return BitField == s.BitField;
 }
-
-int TBitField::operator==(const TBitField& bf) const // сравнение
+int TSet::operator!=(const TSet& s) const // сравнение
 {
-
-	int k = 1;
-	if (BitLen != bf.BitLen)
-	{
-		k = 0;
-	}
-	else
-	{
-		for (int i = 0; i < MemLen; i++)
-		{
-			if (pMem[i] != bf.pMem[i])
-			{
-				k = 0;
-			}
-		}
-	}
-	return k;
+    return BitField != s.BitField;
 }
-
-int TBitField::operator!=(const TBitField& bf) const // сравнение
+TSet TSet::operator+(const TSet& s) // объединение
 {
-
-	int k = 0;
-	if (BitLen != bf.BitLen)
-	{
-		k = 1;
-	}
-	else
-	{
-		for (int i = 0; i < MemLen; i++)
-		{
-			if (pMem[i] != bf.pMem[i])
-			{
-				k = 1;
-			}
-		}
-	}
-	return k;
+    TSet temp((BitField) | (s.BitField));
+    return temp;
 }
-
-TBitField TBitField::operator|(const TBitField& bf) // операция "или"
+TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-	int len;
-	if (BitLen > bf.BitLen)
-		len = BitLen;
-	else
-		len = bf.BitLen;
-
-	TBitField temp(len);
-
-	for (int i = 0; i < MemLen; i++)
-		temp.pMem[i] = pMem[i];
-
-	for (int i = 0; i < bf.MemLen; i++)
-		temp.pMem[i] |= bf.pMem[i];
-
-	return temp;
+    TSet temp(*this);
+    temp.InsElem(Elem);
+    return temp;
 }
-
-TBitField TBitField::operator&(const TBitField& bf) // операция "и"
+TSet TSet::operator-(const int Elem) // разность с элементом
 {
-	int len, mem;
-	if (BitLen > bf.BitLen)
-	{
-		len = BitLen;
-		mem = bf.MemLen;
-	}
-	else
-	{
-		len = bf.BitLen;
-		mem = MemLen;
-	}
-
-	TBitField temp(len);
-
-	for (int i = 0; i < mem; i++)
-		temp.pMem[i] = pMem[i] & bf.pMem[i];
-
-	return temp;
+    TSet temp(*this);
+    temp.DelElem(Elem);
+    return temp;
 }
-
-TBitField TBitField::operator~(void) // отрицание
+TSet TSet::operator*(const TSet& s) // пересечение
 {
-	TBitField temp(BitLen);
-	for (int i = 0; i < BitLen; i++)
-		if (GetBit(i) != 0)
-			temp.ClrBit(i);
-		else
-			temp.SetBit(i);
-	return temp;
+    TSet temp((BitField) & (s.BitField));
+    return temp;
 }
-
-// ввод/вывод
-
-istream& operator>>(istream& istr, TBitField& bf) // ввод
+TSet TSet::operator~(void) // дополнение
 {
-	char x;
-	for (int i = 0; i < bf.BitLen; i++)
-	{
-		istr >> x;
-		if (x == '0')
-		{
-			bf.ClrBit(i);
-		}
-		else if (x == '1')
-		{
-			bf.SetBit(i);
-		}
-		else
-		{
-			break;
-		}
-	}
-	return istr;
+    TSet temp(~BitField);
+    return temp;
 }
-
-ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
+// перегрузка ввода/вывода
+istream& operator>>(istream& istr, TSet& s) // ввод
 {
-	for (int i = 0; i < bf.BitLen; i++)
-	{
-		if (bf.GetBit(i))
-			ostr << '1';
-		else
-			ostr << '0';
-	}
-	return ostr;
+    int n, i = 0;
+    while (i < s.MaxPower)
+    {
+        istr >> n;
+        s.InsElem(n);
+        i++;
+    }
+    return istr;
+}
+ostream& operator<<(ostream& ostr, const TSet& s) // вывод
+{
+    int i = 0;
+    while (i < s.MaxPower)
+    {
+      if (s.IsMember(i))
+        {
+            ostr << i << ' ';
+        }
+    i++;
+    }
+    return ostr;
 }
